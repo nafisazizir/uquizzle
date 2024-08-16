@@ -1,57 +1,109 @@
 /* global chrome */
 import React from 'react';
 import ReactDOM from 'react-dom';
+import App from '../App';
+import '../content.css';
 
-const ContentScript = () => {
-  React.useEffect(() => {
-    const interceptLectureData = () => {
-      const script = document.createElement('script');
-      script.textContent = `
-        (function() {
-          const originalLog = console.log;
-          console.log = function(...args) {
-            if (args[0] === "EchoPlayerV2Full props" && args[1] && args[1].video && args[1].video.mediaId) {
-              window.postMessage({
-                type: 'LECTURE_DATA',
-                mediaId: args[1].video.mediaId,
-                lessonId: args[1].context.lessonId,
-                title: args[1].title
-              }, '*');
-            }
-            originalLog.apply(console, arguments);
-          };
-        })();
-      `;
-      document.documentElement.appendChild(script);
-      script.remove();
-    };
+const injectSidebar = () => {
+  const sidebarRoot = document.createElement('div');
+  sidebarRoot.id = 'echo360-transcriber-sidebar';
+  document.body.appendChild(sidebarRoot);
 
-    interceptLectureData();
+  const toggleButton = document.createElement('button');
+  toggleButton.id = 'echo360-transcriber-toggle';
+  toggleButton.textContent = 'Minimize';
+  toggleButton.style.top = '10px';
+  toggleButton.style.right = '310px';
 
-    const handleMessage = (event) => {
-      if (event.data && event.data.type === 'LECTURE_DATA') {
-        chrome.runtime.sendMessage({
-          action: 'LECTURE_DATA',
-          mediaId: event.data.mediaId,
-          lessonId: event.data.lessonId,
-          title: event.data.title
-        });
-      }
-    };
+  toggleButton.onclick = (e) => {
+    if (!isDragging) {
+      const sidebar = document.getElementById('echo360-transcriber-sidebar');
+      const body = document.body;
+      sidebar.classList.toggle('minimized');
+      toggleButton.classList.toggle('minimized');
+      body.classList.toggle('sidebar-open');
+      toggleButton.textContent = sidebar.classList.contains('minimized') ? 'Expand' : 'Minimize';
+    }
+  };
 
-    window.addEventListener('message', handleMessage);
+  let isDragging = false;
+  let dragStartX, dragStartY;
+  let buttonStartX, buttonStartY;
 
+  const startDragging = (e) => {
+    isDragging = true;
+    dragStartX = e.clientX;
+    dragStartY = e.clientY;
+    const rect = toggleButton.getBoundingClientRect();
+    buttonStartX = rect.left;
+    buttonStartY = rect.top;
+    toggleButton.style.transition = 'none';
+  };
 
-    return () => {
-      window.removeEventListener('message', handleMessage);
-    };
-  }, []);
+  const stopDragging = () => {
+    isDragging = false;
+    toggleButton.style.transition = '';
+  };
 
-  return null;
+  const drag = (e) => {
+    if (!isDragging) return;
+    
+    const deltaX = e.clientX - dragStartX;
+    const deltaY = e.clientY - dragStartY;
+    
+    const newLeft = buttonStartX + deltaX;
+    const newTop = buttonStartY + deltaY;
+    
+    const maxX = window.innerWidth - toggleButton.offsetWidth;
+    const maxY = window.innerHeight - toggleButton.offsetHeight;
+    
+    toggleButton.style.left = `${Math.max(0, Math.min(newLeft, maxX))}px`;
+    toggleButton.style.top = `${Math.max(0, Math.min(newTop, maxY))}px`;
+    toggleButton.style.right = 'auto';
+  };
+
+  toggleButton.addEventListener('mousedown', startDragging);
+  document.addEventListener('mousemove', drag);
+  document.addEventListener('mouseup', stopDragging);
+  toggleButton.addEventListener('dragstart', (e) => e.preventDefault());
+
+  document.body.appendChild(toggleButton);
+
+  ReactDOM.render(<App />, sidebarRoot);
 };
 
-const root = document.createElement('div');
-root.id = 'echo360-transcriber-root';
-document.body.appendChild(root);
+const interceptLectureData = () => {
+  const script = document.createElement('script');
+  script.textContent = `
+    (function() {
+      const originalLog = console.log;
+      console.log = function(...args) {
+        if (args[0] === "EchoPlayerV2Full props" && args[1] && args[1].video && args[1].video.mediaId) {
+          window.postMessage({
+            type: 'LECTURE_DATA',
+            mediaId: args[1].video.mediaId,
+            lessonId: args[1].context.lessonId,
+            title: args[1].title
+          }, '*');
+        }
+        originalLog.apply(console, arguments);
+      };
+    })();
+  `;
+  document.documentElement.appendChild(script);
+  script.remove();
+};
 
-ReactDOM.render(<ContentScript />, root);
+interceptLectureData();
+injectSidebar();
+
+window.addEventListener('message', function(event) {
+  if (event.data && event.data.type === 'LECTURE_DATA') {
+    chrome.runtime.sendMessage({
+      action: 'LECTURE_DATA',
+      mediaId: event.data.mediaId,
+      lessonId: event.data.lessonId,
+      title: event.data.title
+    });
+  }
+});

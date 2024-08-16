@@ -5,6 +5,7 @@ import './App.css';
 const App = () => {
   const [lectureTitle, setLectureTitle] = useState('');
   const [transcriptText, setTranscriptText] = useState('');
+  const [isMinimized, setIsMinimized] = useState(false);
 
   useEffect(() => {
     const messageListener = (message, sender, sendResponse) => {
@@ -13,10 +14,8 @@ const App = () => {
       }
     };
 
-    // Listen for messages from the background script
     chrome.runtime.onMessage.addListener(messageListener);
 
-    // Cleanup listener on unmount
     return () => chrome.runtime.onMessage.removeListener(messageListener);
   }, []);
 
@@ -27,16 +26,34 @@ const App = () => {
         setTranscriptText(`Error: ${response.error}`);
       } else {
         setTranscriptText('Transcript fetched successfully!');
-        // Process and display the transcript here
       }
     });
   }, []);
 
+  const toggleSidebar = () => {
+    setIsMinimized(!isMinimized);
+    const sidebar = document.getElementById('echo360-transcriber-sidebar');
+    const toggleButton = document.getElementById('echo360-transcriber-toggle');
+    const body = document.body;
+    
+    if (isMinimized) {
+      sidebar.classList.remove('minimized');
+      toggleButton.classList.remove('minimized');
+      toggleButton.textContent = 'Minimize';
+      body.classList.add('sidebar-open');
+    } else {
+      sidebar.classList.add('minimized');
+      toggleButton.classList.add('minimized');
+      toggleButton.textContent = 'Expand';
+      body.classList.remove('sidebar-open');
+    }
+  };
+
   return (
     <div className="App">
-      <h1>Echo360 Lecture Transcriber</h1>
+      <h2>Interactive Exercise</h2>
       <button onClick={handleTranscribe}>Transcribe Lecture</button>
-      {lectureTitle && <h2>{lectureTitle}</h2>}
+      {lectureTitle && <h3>{lectureTitle}</h3>}
       <div>{transcriptText}</div>
     </div>
   );

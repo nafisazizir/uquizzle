@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   } else if (message.action === 'GET_TRANSCRIPT') {
     if (lectureData && lectureData.mediaId && lectureData.lessonId) {
       fetchTranscript(lectureData.mediaId, lectureData.lessonId).then(sendResponse);
-      return true; // Will respond asynchronously
+      return true;
     } else {
       sendResponse({error: 'Lecture data not found. Please ensure you\'re on an Echo360 lecture page and refresh if necessary.'});
     }

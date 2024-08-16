@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Echo360 Lecture Transcriber",
+  "name": "UQ Interactive Exercise",
   "version": "1.0",
-  "description": "Extracts and displays transcripts from Echo360 lecture recordings",
+  "description": "Provides UQ students with interactive exercises through extracting transcripts from Echo360 lecture recordings",
   "permissions": [
     "*://*.echo360.net.au/*",
     "cookies"
@@ -10,14 +10,12 @@
   "content_scripts": [
     {
       "matches": ["*://*.echo360.net.au/*"],
-      "js": ["static/js/content.js"]
+      "js": ["static/js/content.js"],
+      "css": ["static/css/content.css"]
     }
   ],
   "background": {
     "scripts": ["static/js/background.js"],
     "persistent": false
-  },
-  "browser_action": {
-    "default_popup": "index.html"
   }
 }
