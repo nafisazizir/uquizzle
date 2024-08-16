@@ -1,0 +1,23 @@
+{
+  "manifest_version": 2,
+  "name": "Echo360 Lecture Transcriber",
+  "version": "1.0",
+  "description": "Extracts and displays transcripts from Echo360 lecture recordings",
+  "permissions": [
+    "*://*.echo360.net.au/*",
+    "cookies"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.echo360.net.au/*"],
+      "js": ["static/js/content.js"]
+    }
+  ],
+  "background": {
+    "scripts": ["static/js/background.js"],
+    "persistent": false
+  },
+  "browser_action": {
+    "default_popup": "index.html"
+  }
+}
