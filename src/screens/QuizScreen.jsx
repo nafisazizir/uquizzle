@@ -6,6 +6,7 @@ import ProgressIndicator from '../components/ProgressIndicator/index';
 import Question from '../components/Question/index';
 import Options from '../components/Options/index';
 import WaitingScreen from './WaitingScreen';
+import { convertQuestionToMarkdownAndDownload, convertQuestionToPdfAndDownload } from '../services/download';
 import './QuizScreen.css';
 
 function formatTextWithCode(text) {
@@ -17,7 +18,7 @@ function formatTextWithCode(text) {
   ).join('');
 }
 
-const QuizScreen = ({ transcriptText, onNavigate }) => {
+const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answeredQuestions, setAnsweredQuestions] = useState([]);
@@ -90,6 +91,16 @@ const QuizScreen = ({ transcriptText, onNavigate }) => {
     onNavigate('home');
   };
 
+  const handleDownloadQuizzes = async () => {
+    try {
+      await convertQuestionToMarkdownAndDownload(lectureTitle);
+      await convertQuestionToPdfAndDownload(lectureTitle);
+    } catch (error) {
+      console.error("Error downloading quizzes:", error);
+      // You might want to show an error message to the user here
+    }
+  };
+
   if (questions.length === 0) {
     return <WaitingScreen/>;
   }
@@ -115,7 +126,7 @@ const QuizScreen = ({ transcriptText, onNavigate }) => {
             <button className="review-button" onClick={() => console.log('Review Lecture Notes')}>
               Review Lecture Notes
             </button>
-            <button className="download-button" onClick={() => console.log('Download Quizzes')}>
+            <button className="download-button" onClick={handleDownloadQuizzes}>
               Download Quizzes
             </button>
             <button className="dashboard-button" onClick={handleBackToDashboard}>
