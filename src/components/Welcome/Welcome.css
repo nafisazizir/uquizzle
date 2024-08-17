@@ -1,4 +1,4 @@
-.welcome-to-uquizzle {
+.h2 {
     font-family: "Inter-Bold", Helvetica;
     font-size: 19px;
     font-weight: 700;
@@ -32,10 +32,10 @@
     position: relative;
 }
 
-.p {
+.h3 {
     align-self: stretch;
     color: #6b6b6b;
-    font-family: "Inter-Bold", Helvetica;
+    font-family: "Inter-Regular", Helvetica;
     font-size: 16px;
     font-weight: 400;
     letter-spacing: 0;
@@ -156,7 +156,7 @@
     color: #af0159
 }
 
-.div-4 {
+.text-content {
     align-items: center;
     display: flex;
     flex-direction: column;
