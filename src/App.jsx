@@ -57,11 +57,12 @@ const App = () => {
   const renderScreen = () => {
     switch (currentScreen) {
       case "home":
-        return <HomeScreen 
-          onNavigate={setCurrentScreen}
-          lectureTitle={lectureTitle}
-          handleTranscribe={handleTranscribe}
-        />;
+        // return <HomeScreen 
+        //   onNavigate={setCurrentScreen}
+        //   lectureTitle={lectureTitle}
+        //   handleTranscribe={handleTranscribe}
+        // />;
+        return <WaitingScreen text="quizzle"/>;
       case "quiz":
         return <QuizScreen 
           questions={questions}
@@ -77,7 +78,8 @@ const App = () => {
           onNavigate={setCurrentScreen}
         />;
       default:
-        return <HomeScreen onNavigate={setCurrentScreen} />;
+        // return <HomeScreen onNavigate={setCurrentScreen} />;
+        return <WaitingScreen text="quizzle"/>;
     }
   };
 
