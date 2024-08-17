@@ -60,6 +60,8 @@ const App = () => {
         return <HomeScreen 
           onNavigate={setCurrentScreen}
           lectureTitle={lectureTitle}
+          handleTranscribe={handleTranscribe}
+          transcriptText={transcriptText}
         />;
       case "quiz":
         return <QuizScreen 
