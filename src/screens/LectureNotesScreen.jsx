@@ -2,7 +2,7 @@ import React from 'react';
 import { generateLectureNotes } from '../services/generateLectureNotes';
 import LectureNotes from '../components/LectureNotes';
 
-const LectureNotesScreen = ({ lectureNotes, setLectureNotes, transcriptText, onNavigate }) => {
+const LectureNotesScreen = ({ lectureNotes, setLectureNotes, transcriptText, onNavigate, lectureTitle}) => {
   // const handleGenerateNotes = async () => {
   //   const generatedNotes = await generateLectureNotes(transcriptText);
   //   console.log("Notes:", generatedNotes);
@@ -16,7 +16,7 @@ const LectureNotesScreen = ({ lectureNotes, setLectureNotes, transcriptText, onN
         setLectureNotes={setLectureNotes}
         transcriptText={transcriptText}
         onNavigate={onNavigate}
-        generateLectureNotes={generateLectureNotes}
+        lectureTitle={lectureTitle}
       />
     </div>
   );

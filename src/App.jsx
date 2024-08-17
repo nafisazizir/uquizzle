@@ -1,5 +1,7 @@
 /* global chrome */
 import React, { useState, useEffect, useCallback } from "react";
+import { generateQuestions } from "./services/generateQuestions";
+import { generateLectureNotes } from "./services/generateLectureNotes";
 import SidebarBase from "./components/SidebarBase";
 import HomeScreen from "./screens/HomeScreen";
 import QuizScreen from "./screens/QuizScreen";
@@ -8,8 +10,6 @@ import WaitingScreen from "./screens/WaitingScreen";
 import "./components/SidebarBase/SidebarBase.css";
 import "./App.css";
 import WelcomeScreen from "./screens/WelcomeScreen";
-import FeedbackScreen from "./screens/FeedbackScreen";
-import userChoice from "./services/userChoice.json"
 
 
 const App = () => {
@@ -51,6 +51,10 @@ const App = () => {
     });
   }, []);
 
+  const handleJumpTimestamp = (timestamp) => {
+    chrome.runtime.sendMessage({ action: "JUMP_TIMESTAMP", timestamp });
+  };
+
   const renderScreen = () => {
     switch (currentScreen) {
       case "welcome":
@@ -62,8 +66,6 @@ const App = () => {
         return <HomeScreen 
           onNavigate={setCurrentScreen}
           lectureTitle={lectureTitle}
-          handleTranscribe={handleTranscribe}
-          transcriptText={transcriptText}
         />;
       case "quiz":
         return <QuizScreen 
@@ -78,13 +80,7 @@ const App = () => {
           setLectureNotes={setLectureNotes}
           transcriptText={transcriptText}
           onNavigate={setCurrentScreen}
-        />;
-      case "feedback":
-        return <FeedbackScreen 
-          transcriptText={transcriptText}
-          onNavigate={setCurrentScreen}
-          questions={questions}
-          userChoice={userChoice}
+          lectureTitle={lectureTitle}
         />;
       default:
         return <WelcomeScreen onNavigate={setCurrentScreen} />;
