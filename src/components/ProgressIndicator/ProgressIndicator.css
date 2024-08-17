@@ -1,0 +1,44 @@
+.progress-indicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 28px;
+  }
+  
+  .indicator {
+    width: 22.77px;
+    height: 22.77px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    cursor: default;
+  }
+  
+  .indicator.completed {
+    background-color: var(--eggplant);
+  }
+  
+  .indicator.current {
+    background-color: var(--strawbz);
+  }
+  
+  .indicator.upcoming {
+    background-color: var(--grey);
+  }
+  
+  .indicator.answered {
+    cursor: pointer;
+  }
+  
+  .indicator-number {
+    display: none;
+    position: absolute;
+    top: -25px;
+    font-size: 12px;
+    color: var(--black);
+  }
+  
+  .indicator:hover .indicator-number {
+    display: block;
+  }
