@@ -10,7 +10,7 @@ const LectureNotesScreen = ({ lectureNotes, setLectureNotes, transcriptText, onN
         setLectureNotes={setLectureNotes}
         transcriptText={transcriptText}
         onNavigate={onNavigate}
-        generateLectureNotes={generateLectureNotes}
+        lectureTitle={lectureTitle}
       />
     </div>
   );

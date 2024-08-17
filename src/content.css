@@ -48,10 +48,12 @@
   }
   
   .notes-content {
-    max-height: 60vh;
+    height: 60vh;
     overflow-y: auto;
     margin: 20px 0;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #efefef;
     border-radius: 5px;
+    justify-content: left;
+    position: relative;
   }
