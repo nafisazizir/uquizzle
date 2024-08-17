@@ -16,7 +16,6 @@ const CenterWaiting= () => {
                 <div className='center-waiting-text'>
                     <h5>AI is curating your <span className="highlight-text">quizzles</span></h5>
                     <h6>Questions will pop up here as you watch the lecture</h6>
-                                    
                 </div>  
             </Sparkles>
             
