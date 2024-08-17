@@ -1,26 +1,17 @@
 /* global chrome */
 import React, { useState, useEffect, useCallback } from "react";
-import { generateQuestions } from "./services/generateQuestions";
-import { generateLectureNotes } from "./services/generateLectureNotes";
 import SidebarBase from "./components/SidebarBase";
 import HomeScreen from "./screens/HomeScreen";
 import QuizScreen from "./screens/QuizScreen";
-import NotesScreen from "./screens/NotesScreen";
+import LectureNotesScreen from "./screens/LectureNotesScreen";
+import WaitingScreen from "./screens/WaitingScreen";
 import "./components/SidebarBase/SidebarBase.css";
 import "./App.css";
+import WelcomeScreen from "./screens/WelcomeScreen";
 
-// Function to format text and wrap code snippets in <code> tags
-function formatTextWithCode(text) {
-  const codePattern = /'''(.*?)'''/g;
-  return text.split(codePattern).map((segment, index) =>
-    index % 2 === 1
-      ? `<code>${segment}</code>`  // Wrap code segments
-      : segment  // Leave normal text as is
-  ).join('');
-}
 
 const App = () => {
-  const [currentScreen, setCurrentScreen] = useState("home");
+  const [currentScreen, setCurrentScreen] = useState("welcome");
   const [lectureTitle, setLectureTitle] = useState("");
   const [transcriptText, setTranscriptText] = useState("");
   const [questions, setQuestions] = useState([]);
@@ -58,12 +49,13 @@ const App = () => {
     });
   }, []);
 
-  const handleJumpTimestamp = (timestamp) => {
-    chrome.runtime.sendMessage({ action: "JUMP_TIMESTAMP", timestamp });
-  };
-
   const renderScreen = () => {
     switch (currentScreen) {
+      case "welcome":
+        return <WelcomeScreen
+          onNavigate={setCurrentScreen}
+          handleTranscribe={handleTranscribe}
+        />;
       case "home":
         return <HomeScreen 
           onNavigate={setCurrentScreen}
@@ -79,14 +71,14 @@ const App = () => {
           onNavigate={setCurrentScreen}
         />;
       case "notes":
-        return <NotesScreen 
+        return <LectureNotesScreen 
           lectureNotes={lectureNotes}
           setLectureNotes={setLectureNotes}
           transcriptText={transcriptText}
           onNavigate={setCurrentScreen}
         />;
       default:
-        return <HomeScreen onNavigate={setCurrentScreen} />;
+        return <WelcomeScreen onNavigate={setCurrentScreen} />;
     }
   };
 
