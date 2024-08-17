@@ -31,10 +31,10 @@ const Welcome = ( {onNavigate, handleTranscribe}) => {
                 <div className="text-content">
                   <h2><span className="black-title">Welcome to </span><span className="strawbz-title">UQ</span><span className="black-title">uizzle</span></h2>
 
-                  <h3>
+                  <div className="desc">
                     We build our exercises based on lecture transcripts. We transform your learning materials into
                     interactive quizzes.
-                  </h3>
+                  </div>
                 </div>
               </div>
 
