@@ -1,7 +1,7 @@
 import React from "react";
 import "./Welcome.css";
 
-const Welcome = ( {onNavigate}) => {
+const Welcome = ( {onNavigate, handleTranscribe}) => {
   return (
     <div className="frame-wrapper">
       <div className="frame">
@@ -39,7 +39,14 @@ const Welcome = ( {onNavigate}) => {
                   </p>
                 </div>
               </div>
-              <button class="button-strawbz" onClick={() => onNavigate('home')}>Get Started</button>
+              <button
+                class="button-strawbz"
+                onClick={() => {
+                  onNavigate('home');
+                  handleTranscribe();
+                }}>
+                  Get Started
+              </button>
             </div>
           </div>
         </div>
