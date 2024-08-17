@@ -1,15 +1,17 @@
 /* global chrome */
-import React, { useState, useEffect, useCallback } from 'react';
-import './App.css';
+import React, { useState, useEffect, useCallback } from "react";
+import { generateQuestions } from "./services/generateQuestions";
+import "./App.css";
 
 const App = () => {
-  const [lectureTitle, setLectureTitle] = useState('');
-  const [transcriptText, setTranscriptText] = useState('');
+  const [lectureTitle, setLectureTitle] = useState("");
+  const [transcriptText, setTranscriptText] = useState("");
   const [isMinimized, setIsMinimized] = useState(false);
+  const [questions, setQuestions] = useState("");
 
   useEffect(() => {
     const messageListener = (message, sender, sendResponse) => {
-      if (message.action === 'LECTURE_DATA') {
+      if (message.action === "LECTURE_DATA") {
         setLectureTitle(message.title);
       }
     };
@@ -20,32 +22,32 @@ const App = () => {
   }, []);
 
   const handleTranscribe = useCallback(() => {
-    setTranscriptText('Fetching lecture transcript...');
-    chrome.runtime.sendMessage({ action: 'GET_TRANSCRIPT' }, (response) => {
+    setTranscriptText("Fetching lecture transcript...");
+    chrome.runtime.sendMessage({ action: "GET_TRANSCRIPT" }, (response) => {
       if (response.error) {
         setTranscriptText(`Error: ${response.error}`);
       } else {
-        setTranscriptText('Transcript fetched successfully!');
+        setTranscriptText(response);
       }
     });
   }, []);
 
   const toggleSidebar = () => {
     setIsMinimized(!isMinimized);
-    const sidebar = document.getElementById('echo360-transcriber-sidebar');
-    const toggleButton = document.getElementById('echo360-transcriber-toggle');
+    const sidebar = document.getElementById("echo360-transcriber-sidebar");
+    const toggleButton = document.getElementById("echo360-transcriber-toggle");
     const body = document.body;
-    
+
     if (isMinimized) {
-      sidebar.classList.remove('minimized');
-      toggleButton.classList.remove('minimized');
-      toggleButton.textContent = 'Minimize';
-      body.classList.add('sidebar-open');
+      sidebar.classList.remove("minimized");
+      toggleButton.classList.remove("minimized");
+      toggleButton.textContent = "Minimize";
+      body.classList.add("sidebar-open");
     } else {
-      sidebar.classList.add('minimized');
-      toggleButton.classList.add('minimized');
-      toggleButton.textContent = 'Expand';
-      body.classList.remove('sidebar-open');
+      sidebar.classList.add("minimized");
+      toggleButton.classList.add("minimized");
+      toggleButton.textContent = "Expand";
+      body.classList.remove("sidebar-open");
     }
   };
 
@@ -54,7 +56,42 @@ const App = () => {
       <h2>Interactive Exercise</h2>
       <button onClick={handleTranscribe}>Transcribe Lecture</button>
       {lectureTitle && <h3>{lectureTitle}</h3>}
-      <div>{transcriptText}</div>
+      <pre>
+        {transcriptText === "" ||
+        transcriptText === "Fetching lecture transcript..."
+          ? transcriptText
+          : "Successfully got the transcript"}
+      </pre>
+
+      <button
+        onClick={async () => {
+          const result = await generateQuestions(transcriptText);
+          setQuestions(result);
+        }}
+      >
+        Generate Questions
+      </button>
+      <div>
+        {questions.length === 0 ? (
+          <p>No questions generated yet.</p>
+        ) : (
+          <ul>
+            {questions.map((questionData, index) => (
+              <li key={index} className="mb-4">
+                <div className="font-bold">{questionData.questions}</div>
+                <ul className="list-disc pl-4">
+                  {questionData.options.map((option, optionIndex) => (
+                    <li key={optionIndex}>{option}</li>
+                  ))}
+                </ul>
+                <div className="text-sm text-gray-500">
+                  Correct Option Index: {questionData.correctOptionIndex}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </div>
   );
 };
