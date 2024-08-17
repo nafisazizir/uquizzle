@@ -11,7 +11,7 @@ const WaitingScreen = () => {
         <div className='waiting-screen-container'>
             <QuizzleWordLogo/>
             <CenterWaiting/>  
-            <div className="lecture-reminder">Remember to pay attention to the lecture!</div>
+            <p>Remember to pay attention to the lecture!</p>
             <Footer/>            
         </div>
     )
