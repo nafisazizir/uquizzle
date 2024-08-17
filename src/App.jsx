@@ -8,6 +8,8 @@ import WaitingScreen from "./screens/WaitingScreen";
 import "./components/SidebarBase/SidebarBase.css";
 import "./App.css";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import FeedbackScreen from "./screens/FeedbackScreen";
+import userChoice from "./services/userChoice.json"
 
 
 const App = () => {
@@ -76,6 +78,13 @@ const App = () => {
           setLectureNotes={setLectureNotes}
           transcriptText={transcriptText}
           onNavigate={setCurrentScreen}
+        />;
+      case "feedback":
+        return <FeedbackScreen 
+          transcriptText={transcriptText}
+          onNavigate={setCurrentScreen}
+          questions={questions}
+          userChoice={userChoice}
         />;
       default:
         return <WelcomeScreen onNavigate={setCurrentScreen} />;
