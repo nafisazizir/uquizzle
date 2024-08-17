@@ -21,7 +21,9 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       });
     } else {
       sendResponse({ error: 'Timestamp not provided.' });
-    }
+    } 
+  } else if (message.action === 'GET_LECTURE_DATA') {
+    sendResponse(lectureData);
   }
 });
 
