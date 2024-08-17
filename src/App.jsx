@@ -32,6 +32,15 @@ const App = () => {
 
   const handleTranscribe = useCallback(() => {
     setTranscriptText("Fetching lecture transcript...");
+    chrome.runtime.sendMessage({ action: "GET_LECTURE_DATA" }, (response) => {
+      if (response.error) {
+        setLectureTitle(`Error: ${response.error}`);
+      } else {
+        setLectureTitle(response.title);
+        console.log(response.title);
+      }
+    });
+    
     chrome.runtime.sendMessage({ action: "GET_TRANSCRIPT" }, (response) => {
       if (response.error) {
         setTranscriptText(`Error: ${response.error}`);
@@ -55,6 +64,7 @@ const App = () => {
       case "home":
         return <HomeScreen 
           onNavigate={setCurrentScreen}
+          lectureTitle={lectureTitle}
         />;
       case "quiz":
         return <QuizScreen 

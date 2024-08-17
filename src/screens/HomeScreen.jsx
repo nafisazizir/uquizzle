@@ -5,8 +5,10 @@ import { ReactComponent as NoteIcon } from "../assets/note.svg";
 import { ReactComponent as MadeLove } from "../assets/madelove.svg";
 import { ReactComponent as Product } from "../assets/product.svg";
 import ButtonWithLogo from "../components/ButtonWithLogo";
+import { convertQuestionToMarkdownAndDownload, convertLectureNotesToMarkdownAndDownload } from '../services/download';
 
-const HomeScreen = ({ onNavigate }) => {
+
+const HomeScreen = ({ onNavigate, lectureTitle }) => {
   return (
     <div
       style={{
@@ -72,6 +74,8 @@ const HomeScreen = ({ onNavigate }) => {
             onClick={() => onNavigate("notes")}
             fullWidth={true}
           />
+      <button onClick={() => convertQuestionToMarkdownAndDownload(lectureTitle)}>Download Question</button>
+      <button onClick={() => convertLectureNotesToMarkdownAndDownload(lectureTitle)}>Download Lecture Notes</button>
         </div>
       </div>
 
