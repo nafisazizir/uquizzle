@@ -1,46 +1,75 @@
-import React from 'react';
+/* global chrome */
+import React, { useState } from 'react';
 import { generateQuestions } from '../services/generateQuestions';
+import Header from '../components/Header/index';
+import ProgressIndicator from '../components/ProgressIndicator/index';
+import Question from '../components/Question/index';
+import Options from '../components/Options/index';
+import './QuizScreen.css';
 
 function formatTextWithCode(text) {
-    const codePattern = /'''(.*?)'''/g;
-    return text.split(codePattern).map((segment, index) =>
-      index % 2 === 1
-        ? `<code>${segment}</code>`  // Wrap code segments
-        : segment  // Leave normal text as is
-    ).join('');
-  }
+  const codePattern = /'''(.*?)'''/g;
+  return text.split(codePattern).map((segment, index) =>
+    index % 2 === 1
+      ? `<code>${segment}</code>`
+      : segment
+  ).join('');
+}
 
 const QuizScreen = ({ questions, setQuestions, transcriptText, onNavigate }) => {
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+
   const handleGenerateQuestions = async () => {
     const generatedQuestions = await generateQuestions(transcriptText);
-    console.log("Questions:", generateQuestions);
+    console.log("Questions:", generatedQuestions);
     setQuestions(generatedQuestions);
   };
 
+  const handleOptionSelect = (optionIndex) => {
+    console.log(`Selected option: ${optionIndex}`);
+  };
+
+  const handleNextQuestion = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      console.log("Quiz completed");
+    }
+  };
+
+  const handleJumpTimestamp = () => {
+    const timestamp = questions[currentQuestionIndex].timestamp;
+    chrome.runtime.sendMessage({ action: "JUMP_TIMESTAMP", timestamp });
+  };
+
   return (
-    <div className="screen-container">
-      <h2>Quiz</h2>
-      <button onClick={handleGenerateQuestions}>Generate Questions</button>
+    <div className="quiz-screen">
+      <Header onNavigate={onNavigate} />
       {questions.length === 0 ? (
-        <p>No questions generated yet.</p>
+        <div className="screen-container">
+          <h2>Quiz</h2>
+          <button onClick={handleGenerateQuestions}>Generate Questions</button>
+          <p>No questions generated yet.</p>
+        </div>
       ) : (
-        <ul>
-              {questions.map((questionData, index) => (
-                <li key={index} className="mb-4">
-                  <h4 dangerouslySetInnerHTML={{ __html: formatTextWithCode(questionData.question) }} />
-                  <ul className="list-disc pl-4">
-                    {questionData.options.map((option, optionIndex) => (
-                      <li key={optionIndex} dangerouslySetInnerHTML={{ __html: formatTextWithCode(option) }} />
-                    ))}
-                  </ul>
-                </li>
-              ))}
-            </ul>
+        <>
+          <ProgressIndicator totalQuestions={questions.length} currentQuestion={currentQuestionIndex} />
+          <Question 
+            questionNumber={currentQuestionIndex + 1} 
+            questionText={questions[currentQuestionIndex].question}
+            formatTextWithCode={formatTextWithCode}
+          />
+          <Options 
+            options={questions[currentQuestionIndex].options} 
+            correctAnswer={questions[currentQuestionIndex].options.indexOf(questions[currentQuestionIndex].correctAnswer)}
+            explanations={questions[currentQuestionIndex].explanation}
+            onSelect={handleOptionSelect}
+            onNextQuestion={handleNextQuestion}
+            onJumpTimestamp={handleJumpTimestamp}
+            formatTextWithCode={formatTextWithCode}
+          />
+        </>
       )}
-      <div className="navigation-buttons">
-        <button onClick={() => onNavigate('home')}>Back to Home</button>
-        <button onClick={() => onNavigate('notes')}>Go to Notes</button>
-      </div>
     </div>
   );
 };

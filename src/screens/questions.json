@@ -1,0 +1,181 @@
+[
+  {
+    "question_id": 1,
+    "question": "What is the main purpose of using database views?",
+    "options": [
+      "To improve performance",
+      "To store data permanently",
+      "To create backups",
+      "To enforce data integrity"
+    ],
+    "correctAnswer": "To improve performance",
+    "explanation": [
+      "Database views are primarily used to enhance performance by allowing faster access to data without needing to query the underlying tables directly.",
+      "While views can help with data integrity, their main function is not to enforce it but to provide a simplified way to access data.",
+      "Views do not store data permanently; they are virtual tables that display data from the underlying tables.",
+      "Creating backups is not a function of views; backups are typically handled by database management systems."
+    ],
+    "timestamp": 101860
+  },
+  {
+    "question_id": 2,
+    "question": "What are the three major reasons for using database views?",
+    "options": [
+      "Performance, data partitioning, security",
+      "Data redundancy, performance, data integrity",
+      "Data partitioning, data redundancy, data integrity",
+      "Security, data integrity, performance"
+    ],
+    "correctAnswer": "Performance, data partitioning, security",
+    "explanation": [
+      "The three major reasons for using database views are performance, as they allow for faster data access; data partitioning, as they can help manage data visibility; and security, as they can restrict access to sensitive data.",
+      "Data redundancy is not a reason for using views; rather, views help reduce redundancy by providing a single point of access to data.",
+      "Data integrity is important but is not one of the primary reasons for using views; views are more about how data is accessed and presented."
+    ],
+    "timestamp": 258808
+  },
+  {
+    "question_id": 3,
+    "question": "What is a static constraint in a database?",
+    "options": [
+      "A constraint that is enforced only during data entry",
+      "A constraint that is always enforced throughout the database's lifetime",
+      "A constraint that can be modified at any time",
+      "A constraint that is only enforced during specific transactions"
+    ],
+    "correctAnswer": "A constraint that is always enforced throughout the database's lifetime",
+    "explanation": [
+      "A static constraint is defined to be true for the entire lifetime of the database, ensuring that the data adheres to certain rules at all times.",
+      "Static constraints are not limited to data entry; they are enforced continuously as long as the database exists.",
+      "Static constraints cannot be modified at any time; they are meant to provide consistent rules for data integrity.",
+      "Static constraints are not enforced only during specific transactions; they apply universally to the data."
+    ],
+    "timestamp": 1245550
+  },
+  {
+    "question_id": 4,
+    "question": "What is the role of triggers in a database?",
+    "options": [
+      "To automatically enforce constraints",
+      "To create backups of data",
+      "To improve query performance",
+      "To manage user permissions"
+    ],
+    "correctAnswer": "To automatically enforce constraints",
+    "explanation": [
+      "Triggers are designed to automatically execute actions in response to certain events in the database, such as inserting or updating data, which helps enforce constraints.",
+      "Triggers do not create backups; that is a separate function typically handled by database management systems.",
+      "While triggers can indirectly improve performance by automating tasks, their primary role is not to enhance query performance directly.",
+      "Triggers do not manage user permissions; that is typically handled by database security settings."
+    ],
+    "timestamp": 4374100
+  },
+  {
+    "question_id": 5,
+    "question": "What happens when a database constraint is enabled with validation?",
+    "options": [
+      "All existing data is checked for compliance",
+      "Only new data is checked for compliance",
+      "The system ignores existing data",
+      "The constraint is disabled temporarily"
+    ],
+    "correctAnswer": "All existing data is checked for compliance",
+    "explanation": [
+      "When a constraint is enabled with validation, the database checks all existing data against the new constraint to ensure compliance before allowing any further operations.",
+      "If only new data were checked, it would not ensure the integrity of the existing data, which is the purpose of enabling with validation.",
+      "The system does not ignore existing data; it actively checks it against the constraints when validation is enabled.",
+      "Enabling a constraint does not disable it temporarily; it enforces the rules defined by the constraint."
+    ],
+    "timestamp": 4343189
+  },
+  {
+    "question_id": 6,
+    "question": "What is a dynamic constraint in a database?",
+    "options": [
+      "A constraint that is always true",
+      "A constraint that can change based on conditions",
+      "A constraint that is enforced at the database level",
+      "A constraint that is only enforced during data entry"
+    ],
+    "correctAnswer": "A constraint that can change based on conditions",
+    "explanation": [
+      "Dynamic constraints are conditions that can change based on the current state of the database or the data being processed, allowing for more flexible data management.",
+      "Static constraints are always true, while dynamic constraints are contingent on specific conditions being met.",
+      "Dynamic constraints can be enforced at various levels, not just the database level; they can also apply to specific transactions or operations.",
+      "Dynamic constraints are not limited to data entry; they can apply to any operation that affects the data."
+    ],
+    "timestamp": 1297439
+  },
+  {
+    "question_id": 7,
+    "question": "What is the purpose of a check constraint in a database?",
+    "options": [
+      "To ensure data integrity by enforcing rules",
+      "To create a backup of the data",
+      "To improve query performance",
+      "To manage user access to data"
+    ],
+    "correctAnswer": "To ensure data integrity by enforcing rules",
+    "explanation": [
+      "Check constraints are used to enforce specific rules on the data being entered into a table, ensuring that the data meets certain criteria for integrity.",
+      "Check constraints do not create backups; that is a separate function typically handled by database management systems.",
+      "While check constraints can indirectly improve performance by ensuring data quality, their primary purpose is to enforce rules for data integrity.",
+      "Check constraints do not manage user access; that is typically handled by database security settings."
+    ],
+    "timestamp": 3971750
+  },
+  {
+    "question_id": 8,
+    "question": "What is the significance of the primary key in a database?",
+    "options": [
+      "It uniquely identifies each record in a table",
+      "It allows for duplicate records",
+      "It is used to create backups",
+      "It manages user permissions"
+    ],
+    "correctAnswer": "It uniquely identifies each record in a table",
+    "explanation": [
+      "The primary key is a unique identifier for each record in a table, ensuring that no two records can have the same key value, which is essential for data integrity.",
+      "The primary key does not allow for duplicate records; that is one of its main functions to ensure uniqueness.",
+      "The primary key is not used to create backups; backups are typically handled by database management systems.",
+      "The primary key does not manage user permissions; that is typically handled by database security settings."
+    ],
+    "timestamp": 1527199
+  },
+  {
+    "question_id": 9,
+    "question": "What is the purpose of a foreign key in a database?",
+    "options": [
+      "To create a relationship between two tables",
+      "To store data permanently",
+      "To improve query performance",
+      "To manage user permissions"
+    ],
+    "correctAnswer": "To create a relationship between two tables",
+    "explanation": [
+      "A foreign key is used to establish a link between two tables, allowing for the creation of relationships and ensuring referential integrity between the data.",
+      "Foreign keys do not store data permanently; they reference primary keys in other tables to create relationships.",
+      "While foreign keys can help with data integrity, their primary purpose is to create relationships between tables, not to improve query performance directly.",
+      "Foreign keys do not manage user permissions; that is typically handled by database security settings."
+    ],
+    "timestamp": 1685770
+  },
+  {
+    "question_id": 10,
+    "question": "What is the function of a trigger in a database?",
+    "options": [
+      "To automatically execute a specified action when certain conditions are met",
+      "To create a backup of the database",
+      "To improve query performance",
+      "To manage user permissions"
+    ],
+    "correctAnswer": "To automatically execute a specified action when certain conditions are met",
+    "explanation": [
+      "Triggers are designed to automatically perform actions in response to specific events in the database, such as inserting or updating data, based on defined conditions.",
+      "Triggers do not create backups; that is a separate function typically handled by database management systems.",
+      "While triggers can indirectly improve performance by automating tasks, their primary function is to execute actions based on conditions, not to enhance query performance directly.",
+      "Triggers do not manage user permissions; that is typically handled by database security settings."
+    ],
+    "timestamp": 4374100
+  }
+]
