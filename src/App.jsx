@@ -69,6 +69,7 @@ const App = () => {
           onNavigate={setCurrentScreen}
           lectureTitle={lectureTitle}
           handleTranscribe={handleTranscribe}
+          transcriptText={transcriptText}
         />;
       case "quiz":
         return <QuizScreen 
