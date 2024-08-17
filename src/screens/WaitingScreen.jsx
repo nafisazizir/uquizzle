@@ -6,11 +6,11 @@ import './WaitingScreen.css'
 
 
 
-const WaitingScreen = (text='quizzles') => {
+const WaitingScreen = () => {
     return(
         <div className='waiting-screen-container'>
             <QuizzleWordLogo/>
-            <CenterWaiting dynamicText={text}/>  
+            <CenterWaiting/>  
             <p>Remember to pay attention to the lecture!</p>
             <Footer/>            
         </div>
