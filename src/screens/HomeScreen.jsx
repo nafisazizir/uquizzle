@@ -89,6 +89,7 @@ const HomeScreen = ({ onNavigate, lectureTitle, handleTranscribe, transcriptText
       <button onClick={() => convertQuestionToMarkdownAndDownload(lectureTitle)}>Download Question</button>
       <button onClick={() => convertLectureNotesToMarkdownAndDownload(lectureTitle)}>Download Lecture Notes</button>
       <button onClick={handleGenerateFeedback}>Generate Feedback</button>
+      <button onClick={() => onNavigate("feedback")}>Feedback</button>
         </div>
       </div>
 
