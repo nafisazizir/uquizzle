@@ -5,6 +5,7 @@ import { getContent, getContentTimestamp } from "./transcript";
 
 export const generateQuestions = async (transcriptText) => {
   const content = await getContentTimestamp(transcriptText);
+  const contentJSonString =  JSON.stringify(content,null, 2)
   
   const prompt = `You are an expert quiz creator tasked with generating multiple-choice questions from lecture transcript excerpts. The data contains timestamps and spoken content, and your job is to identify and categorize relevant course material content, then formulate quiz questions.
 
@@ -18,7 +19,7 @@ export const generateQuestions = async (transcriptText) => {
   7.Timestamp the Answer: Include the timestamp from the original data where the correct answer is derived.
 
   The content is:
-  ${content}
+  ${contentJSonString}
 
   Output Format:
   Return a JSON array where each entry contains:
