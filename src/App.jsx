@@ -36,6 +36,11 @@ const App = () => {
     });
   }, []);
 
+  // timestamp in ms
+  const handleJumpTimestamp = (timestamp) => {
+    chrome.runtime.sendMessage({ action: "JUMP_TIMESTAMP", timestamp });
+  };
+
   const toggleSidebar = () => {
     setIsMinimized(!isMinimized);
     const sidebar = document.getElementById("echo360-transcriber-sidebar");
