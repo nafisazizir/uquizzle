@@ -43,6 +43,13 @@ module.exports = {
         ],
       });
 
+      const babelLoader = config.module.rules.find(rule => rule.oneOf).oneOf.find(
+        rule => rule.loader && rule.loader.includes('babel-loader')
+      );
+      if (babelLoader) {
+        babelLoader.test = /\.(js|mjs|jsx|ts|tsx)$/;
+      }
+
       return config;
     },
   },
