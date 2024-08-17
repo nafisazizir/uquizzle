@@ -11,6 +11,7 @@ const Welcome = ( {onNavigate, handleTranscribe}) => {
           </div>
           <div className="div-2"> {/* ini nge-wrap all kecuali atas yg hidden */}
             <div className="div-3">{/* pake button get started*/}
+
               <div className="div-3-5"> {/*tanpa button get started*/}
                 <div className="logo-uquizzle">{/* UQuizzle atas */}
                   <div className="logo-wrapper">
@@ -26,19 +27,17 @@ const Welcome = ( {onNavigate, handleTranscribe}) => {
                   </div>
                   <div className="text-wrapper">uizzle</div>
                 </div>
-                <div className="div-4">
-                  <p className="welcome-to-uquizzle">
-                    <span className="black-title">Welcome to </span>
-                    <span className="strawbz-title">UQ</span>
-                    <span className="black-title">uizzle</span>
-                    <span className="strawbz-title">.</span>
-                  </p>
-                  <p className="p">
+
+                <div className="text-content">
+                  <h2><span className="black-title">Welcome to </span><span className="strawbz-title">UQ</span><span className="black-title">uizzle</span></h2>
+
+                  <div className="desc">
                     We build our exercises based on lecture transcripts. We transform your learning materials into
                     interactive quizzes.
-                  </p>
+                  </div>
                 </div>
               </div>
+
               <button
                 class="button-strawbz"
                 onClick={() => {
@@ -47,6 +46,7 @@ const Welcome = ( {onNavigate, handleTranscribe}) => {
                 }}>
                   Get Started
               </button>
+
             </div>
           </div>
         </div>

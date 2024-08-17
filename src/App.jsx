@@ -1,11 +1,9 @@
 /* global chrome */
 import React, { useState, useEffect, useCallback } from "react";
-import { generateQuestions } from "./services/generateQuestions";
-import { generateLectureNotes } from "./services/generateLectureNotes";
 import SidebarBase from "./components/SidebarBase";
 import HomeScreen from "./screens/HomeScreen";
 import QuizScreen from "./screens/QuizScreen";
-import NotesScreen from "./screens/NotesScreen";
+import LectureNotesScreen from "./screens/LectureNotesScreen";
 import WaitingScreen from "./screens/WaitingScreen";
 import "./components/SidebarBase/SidebarBase.css";
 import "./App.css";
@@ -51,10 +49,6 @@ const App = () => {
     });
   }, []);
 
-  const handleJumpTimestamp = (timestamp) => {
-    chrome.runtime.sendMessage({ action: "JUMP_TIMESTAMP", timestamp });
-  };
-
   const renderScreen = () => {
     switch (currentScreen) {
       case "welcome":
@@ -75,7 +69,7 @@ const App = () => {
           onNavigate={setCurrentScreen}
         />;
       case "notes":
-        return <NotesScreen 
+        return <LectureNotesScreen 
           lectureNotes={lectureNotes}
           setLectureNotes={setLectureNotes}
           transcriptText={transcriptText}
