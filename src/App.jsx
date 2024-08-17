@@ -78,6 +78,7 @@ const App = () => {
           setLectureNotes={setLectureNotes}
           transcriptText={transcriptText}
           onNavigate={setCurrentScreen}
+          lectureTitle={lectureTitle}
         />;
       case "feedback":
         return <FeedbackScreen 
