@@ -27,10 +27,10 @@ export async function getContentTimestamp(transcriptText) {
   });
 
   // testing purpose limit the array!
-  return response.slice(0, 150);
+  // return response.slice(0, 150);
 
   // use this return in prod!!
-  // return response;
+  return response;
 }
 
 export async function getContent(transcriptText) {

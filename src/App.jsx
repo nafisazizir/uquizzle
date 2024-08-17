@@ -2,12 +2,13 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { generateQuestions } from "./services/generateQuestions";
 import { generateLectureNotes } from "./services/generateLectureNotes";
+import SidebarBase from "./components/SidebarBase";
+import "./components/SidebarBase/SidebarBase.css";
 import "./App.css";
 
 const App = () => {
   const [lectureTitle, setLectureTitle] = useState("");
   const [transcriptText, setTranscriptText] = useState("");
-  const [isMinimized, setIsMinimized] = useState(false);
   const [questions, setQuestions] = useState("");
   const [lectureNotes, setLectureNotes] = useState(
     "No lecture notes generated yet."
@@ -36,6 +37,11 @@ const App = () => {
     });
   }, []);
 
+  // timestamp in ms
+  const handleJumpTimestamp = (timestamp) => {
+    chrome.runtime.sendMessage({ action: "JUMP_TIMESTAMP", timestamp });
+  };
+
   const toggleSidebar = () => {
     setIsMinimized(!isMinimized);
     const sidebar = document.getElementById("echo360-transcriber-sidebar");
@@ -56,27 +62,27 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <h2>Interactive Exercise</h2>
-      <button onClick={handleTranscribe}>Transcribe Lecture</button>
-      {lectureTitle && <h3>{lectureTitle}</h3>}
-      <pre>
-        {transcriptText === "" ||
-        transcriptText === "Fetching lecture transcript..."
-          ? transcriptText
-          : "Successfully got the transcript"}
-      </pre>
+    <SidebarBase>
+      <div className="App">
+        <h2>Interactive Exercise</h2>
+        <button onClick={handleTranscribe}>Transcribe Lecture</button>
+        {lectureTitle && <h3>{lectureTitle}</h3>}
+        <pre>
+          {transcriptText === "" ||
+          transcriptText === "Fetching lecture transcript..."
+            ? transcriptText
+            : "Successfully got the transcript"}
+        </pre>
 
-      <button
-        onClick={async () => {
-          const result = await generateLectureNotes(transcriptText);
-          setLectureNotes(result);
-        }}
-      >
-        Generate Lecture Notes
-      </button>
-      <pre>{JSON.stringify(lectureNotes, null, 2)}</pre>
-
+        <button
+          onClick={async () => {
+            const result = await generateLectureNotes(transcriptText);
+            setLectureNotes(result);
+          }}
+        >
+          Generate Lecture Notes
+        </button>
+        <pre>{JSON.stringify(lectureNotes, null, 2)}</pre>
       <button
         onClick={async () => {
           const result = await generateQuestions(transcriptText);
@@ -105,8 +111,9 @@ const App = () => {
             ))}
           </ul>
         )}
+
       </div>
-    </div>
+    </SidebarBase>
   );
 };
 

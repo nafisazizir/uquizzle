@@ -14,6 +14,14 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     } else {
       sendResponse({error: 'Lecture data not found. Please ensure you\'re on an Echo360 lecture page and refresh if necessary.'});
     }
+  } else if (message.action === 'JUMP_TIMESTAMP') {
+    if (message.timestamp) {
+      chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        chrome.tabs.sendMessage(tabs[0].id, { action: 'JUMP_TIMESTAMP', timestamp: message.timestamp });
+      });
+    } else {
+      sendResponse({ error: 'Timestamp not provided.' });
+    }
   }
 });
 
