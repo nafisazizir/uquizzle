@@ -1,7 +1,7 @@
 import { generateObject } from "ai";
 import { openai } from "./openai";
 import { z } from "zod";
-import { getContent, getContentTimestamp } from "./transcript";
+import { getContentTimestamp } from "./transcript";
 
 export const generateLectureNotes = async (transcriptText) => {
   const content = await getContentTimestamp(transcriptText);
