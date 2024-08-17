@@ -37,6 +37,30 @@ const App = () => {
     });
   }, []);
 
+  // timestamp in ms
+  const handleJumpTimestamp = (timestamp) => {
+    chrome.runtime.sendMessage({ action: "JUMP_TIMESTAMP", timestamp });
+  };
+
+  const toggleSidebar = () => {
+    setIsMinimized(!isMinimized);
+    const sidebar = document.getElementById("echo360-transcriber-sidebar");
+    const toggleButton = document.getElementById("echo360-transcriber-toggle");
+    const body = document.body;
+
+    if (isMinimized) {
+      sidebar.classList.remove("minimized");
+      toggleButton.classList.remove("minimized");
+      toggleButton.textContent = "Minimize";
+      body.classList.add("sidebar-open");
+    } else {
+      sidebar.classList.add("minimized");
+      toggleButton.classList.add("minimized");
+      toggleButton.textContent = "Expand";
+      body.classList.remove("sidebar-open");
+    }
+  };
+
   return (
     <SidebarBase>
       <div className="App">

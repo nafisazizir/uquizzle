@@ -119,3 +119,35 @@ window.addEventListener('message', function(event) {
     });
   }
 });
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.action === 'JUMP_TIMESTAMP') {
+    const video = document.querySelector('video');
+    const progressBar = document.querySelector('#timeline-progress-bar');
+
+    if (video && progressBar) {
+      const totalDuration = video.duration * 1000;
+      const timestamp = message.timestamp; 
+
+      const percentage = (timestamp / totalDuration) * 100;
+      console.log(totalDuration, timestamp, percentage)
+
+      const progressBarRect = progressBar.getBoundingClientRect();
+      console.log(progressBarRect.left, progressBarRect.right, progressBarRect.width);
+      const clickPositionX = progressBarRect.left + (percentage / 100) * (progressBarRect.width);
+
+      const clickEvent = new MouseEvent('click', {
+        clientX: clickPositionX,
+        clientY: progressBarRect.top + (progressBarRect.height / 2),
+        bubbles: true,
+        cancelable: true,
+      });
+
+      progressBar.dispatchEvent(clickEvent);
+
+      sendResponse({ success: true });
+    } else {
+      sendResponse({ error: 'Video player or timeline controls not found.' });
+    }
+  }
+});
