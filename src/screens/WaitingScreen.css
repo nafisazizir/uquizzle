@@ -9,7 +9,7 @@
   overflow: hidden; /* Prevent overflow if stars are slightly outside the container */
 }
 
-p {
+.lecture-reminder {
   padding-bottom: 80px;
   font-size: 12px;
   font-style: italic;
