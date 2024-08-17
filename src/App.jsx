@@ -80,6 +80,7 @@ const App = () => {
           setLectureNotes={setLectureNotes}
           transcriptText={transcriptText}
           onNavigate={setCurrentScreen}
+          lectureTitle={lectureTitle}
         />;
       default:
         return <WelcomeScreen onNavigate={setCurrentScreen} />;
