@@ -1,15 +1,7 @@
-/* global chrome */
-import React, { useState, useEffect, useCallback } from "react";
-import { generateQuestions } from "./services/generateQuestions";
-import { generateLectureNotes } from "./services/generateLectureNotes";
-import SidebarBase from "./components/SidebarBase";
-import "./components/SidebarBase/SidebarBase.css";
-import "./App.css";
-
 const App = () => {
   const [lectureTitle, setLectureTitle] = useState("");
   const [transcriptText, setTranscriptText] = useState("");
-  const [questions, setQuestions] = useState("");
+  const [questions, setQuestions] = useState([]);
   const [lectureNotes, setLectureNotes] = useState(
     "No lecture notes generated yet."
   );
@@ -83,38 +75,32 @@ const App = () => {
           Generate Lecture Notes
         </button>
         <pre>{JSON.stringify(lectureNotes, null, 2)}</pre>
-      <button
-        onClick={async () => {
-          const result = await generateQuestions(transcriptText);
-          setQuestions(result);
-        }}
-      >
-        Generate Questions
-      </button>
-      <div>
-        {questions.length === 0 ? (
-          <p>No questions generated yet.</p>
-        ) : (
-          <ul>
-            {questions.map((questionData, index) => (
-              <li key={index} className="mb-4">
-                <ul className="list-disc pl-4">
-                  {questionData.options.map((option, optionIndex) => (
-                    <li key={optionIndex}>{option}</li>
-                  ))}
-                </ul>
-                <div>
-                  ////////////////
-                </div>
-              </li>
-
-            ))}
-          </ul>
-        )}
-
+        <button
+          onClick={async () => {
+            const result = await generateQuestions(transcriptText);
+            setQuestions(result);
+          }}
+        >
+          Generate Questions
+        </button>
+        <div>
+          {questions.length === 0 ? (
+            <p>No questions generated yet.</p>
+          ) : (
+            <ul>
+              {questions.map((questionData, index) => (
+                <li key={index} className="mb-4">
+                  <ul className="list-disc pl-4">
+                    {questionData.options.map((option, optionIndex) => (
+                      <li key={optionIndex}>{option}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
     </SidebarBase>
   );
 };
-
-export default App;
