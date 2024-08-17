@@ -1,13 +1,7 @@
 import React from 'react';
-import { generateLectureNotes } from '../services/generateLectureNotes';
 import LectureNotes from '../components/LectureNotes';
 
-const LectureNotesScreen = ({ lectureNotes, setLectureNotes, transcriptText, onNavigate }) => {
-  // const handleGenerateNotes = async () => {
-  //   const generatedNotes = await generateLectureNotes(transcriptText);
-  //   console.log("Notes:", generatedNotes);
-  //   setLectureNotes(generatedNotes);
-  // };
+const LectureNotesScreen = ({ lectureNotes, setLectureNotes, transcriptText, onNavigate, lectureTitle}) => {
 
   return (
     <div className="screen-container">
