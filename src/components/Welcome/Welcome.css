@@ -1,0 +1,98 @@
+.welcome-to-uquizzle {
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 19px;
+    font-weight: 700;
+    left: 0;
+    letter-spacing: 0;
+    line-height: normal;
+    text-align: center;
+    top: 0;
+    width: 249px;
+}
+
+.black-title {
+    color: #231f20;
+}
+
+.strawbz-title {
+    color: #d5016c;
+}
+
+.logo-uquizzle {
+    align-items: center;
+    display: inline-flex;
+    position: relative;
+}
+
+.div-3-5 {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+    position: relative;
+}
+
+.p {
+    align-self: stretch;
+    color: #6b6b6b;
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    text-align: center;
+}
+
+.div-3 {
+    align-items:center;
+    display: flex;
+    flex-direction: column;
+    gap: 29px;
+    position: relative;
+}
+
+.button-strawbz {
+    align-items: center;
+    align-self: stretch;
+    background-color: rgba(213, 1, 108, 1);
+    border-radius: 22px;
+    box-shadow: 0px 3.67px 18.34px #d5016c80;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 4px;
+    justify-content: center;
+    overflow: hidden;
+    padding: 8px 80px;
+    position: relative;
+    width: 100%;
+}
+
+.text-wrapper-2 {
+    columns: #ffffff;
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    text-align: center;
+    width: fit-content;
+}
+
+.made-with-by {
+    align-self: stretch;
+    color: #231f20;
+    flex: 1;
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    text-align: center;
+}
+
+.text-wrapper-4 {
+    color: #af0159
+}

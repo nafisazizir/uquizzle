@@ -8,6 +8,7 @@ import QuizScreen from "./screens/QuizScreen";
 import NotesScreen from "./screens/NotesScreen";
 import "./components/SidebarBase/SidebarBase.css";
 import "./App.css";
+import { Welcome } from "./components/Welcome";
 
 // Function to format text and wrap code snippets in <code> tags
 function formatTextWithCode(text) {
@@ -82,6 +83,7 @@ const App = () => {
 
   return (
     <SidebarBase>
+      <Welcome />
       <div className="App">
         {renderScreen()}
       </div>
