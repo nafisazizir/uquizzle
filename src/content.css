@@ -33,3 +33,25 @@
   body.sidebar-open {
     margin-right: 320px;
   }
+
+  .screen-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .navigation-buttons {
+    display: flex;
+    justify-content: space-around;
+    margin-top: auto;
+    padding-top: 20px;
+  }
+  
+  .notes-content {
+    max-height: 60vh;
+    overflow-y: auto;
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
