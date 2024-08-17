@@ -6,6 +6,7 @@ import SidebarBase from "./components/SidebarBase";
 import HomeScreen from "./screens/HomeScreen";
 import QuizScreen from "./screens/QuizScreen";
 import NotesScreen from "./screens/NotesScreen";
+import WaitingScreen from "./screens/WaitingScreen";
 import "./components/SidebarBase/SidebarBase.css";
 import "./App.css";
 import WelcomeScreen from "./screens/WelcomeScreen";

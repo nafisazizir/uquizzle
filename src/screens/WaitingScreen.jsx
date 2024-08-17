@@ -1,0 +1,20 @@
+import React from 'react';
+import QuizzleWordLogo from '../components/QuizzleWordLogo';
+import CenterWaiting from '../components/CenterWaiting';
+import Footer from '../components/Footer';
+import './WaitingScreen.css'
+
+
+
+const WaitingScreen = (text='quizzles') => {
+    return(
+        <div className='waiting-screen-container'>
+            <QuizzleWordLogo/>
+            <CenterWaiting dynamicText={text}/>  
+            <p>Remember to pay attention to the lecture!</p>
+            <Footer/>            
+        </div>
+    )
+}
+
+export default WaitingScreen;
