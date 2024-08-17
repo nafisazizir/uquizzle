@@ -1,10 +1,10 @@
 import React from 'react';
 import Welcome from '../components/Welcome';
 
-const WelcomeScreen = ({ onNavigate }) => {
+const WelcomeScreen = ({ onNavigate, handleTranscribe }) => {
   return (
     <div className="screen-container">
-        <Welcome onNavigate={onNavigate} />
+        <Welcome onNavigate={onNavigate} handleTranscribe={handleTranscribe}/>
     </div>
   );
 };
