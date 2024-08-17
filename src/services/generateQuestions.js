@@ -51,7 +51,7 @@ export const generateQuestions = async (transcriptText) => {
     },
     ...
   ]`;
-  console.time("generateQuestionsTime");
+
   const { object: generatedQuestions } = await generateObject({
     model: openai("gpt-4o-mini"),
     prompt: prompt,
