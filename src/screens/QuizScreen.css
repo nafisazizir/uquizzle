@@ -173,6 +173,73 @@
     background-color: var(--magenta);
   }
   
+  .quiz-completion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .quiz-completion svg {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+  }
+  
+  .quiz-completion h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--strawbz);
+  }
+  
+  .quiz-completion p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: var(--black);
+  }
+  
+  .completion-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .completion-buttons button {
+    padding: 10px;
+    border: none;
+    border-radius: 22.01px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .review-button {
+    background-color: var(--strawbz);
+    color: white;
+  }
+  
+  .download-button {
+    background-color: var(--danube);
+    color: white;
+  }
+  
+  .dashboard-button {
+    background-color: white;
+    color: var(--strawbz);
+    border: 2px solid var(--strawbz) !important;
+  }
+  
+  .made-with-love {
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--black);
+  }
+
   :root {
     --black: rgba(35, 31, 32, 1);
     --blue: rgba(47, 49, 145, 1);

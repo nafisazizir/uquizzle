@@ -1,36 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
-const Options = ({ options, correctAnswer, explanations, onSelect, onNextQuestion, onJumpTimestamp, formatTextWithCode }) => {
-  const [selectedOption, setSelectedOption] = useState(null);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [expandedOption, setExpandedOption] = useState(null);
-
-  useEffect(() => {
-    // Reset state when moving to a new question
-    setSelectedOption(null);
-    setIsSubmitted(false);
-    setExpandedOption(null);
-  }, [options]);
-
-  const handleOptionClick = (index) => {
-    if (!isSubmitted) {
-      setSelectedOption(index);
-    }
-  };
-
-  const handleSubmit = () => {
-    if (selectedOption !== null && !isSubmitted) {
-      setIsSubmitted(true);
-      onSelect(selectedOption);
-    }
-  };
-
-  const handleAccordionToggle = (index) => {
-    if (isSubmitted) {
-      setExpandedOption(expandedOption === index ? null : index);
-    }
-  };
-
+const Options = ({ 
+  options, 
+  correctAnswer, 
+  explanations, 
+  onSelect, 
+  onSubmit,
+  onNextQuestion, 
+  onJumpTimestamp, 
+  formatTextWithCode, 
+  selectedOption, 
+  isSubmitted 
+}) => {
   const getOptionClass = (index) => {
     if (!isSubmitted && index === selectedOption) return 'option-button selected';
     if (!isSubmitted) return 'option-button';
@@ -42,17 +23,17 @@ const Options = ({ options, correctAnswer, explanations, onSelect, onNextQuestio
   return (
     <div className="options">
       <p className="options-instruction">
-        {isSubmitted ? 'Click to see explanation of each answer:' : 'Choose one of the options below:'}
+        {isSubmitted ? 'Explanation for your answer:' : 'Choose one of the options below:'}
       </p>
       <div className="options-list">
         {options.map((option, index) => (
           <div key={index} className="option-container">
             <button 
               className={getOptionClass(index)}
-              onClick={() => isSubmitted ? handleAccordionToggle(index) : handleOptionClick(index)}
+              onClick={() => !isSubmitted && onSelect(index)}
               dangerouslySetInnerHTML={{ __html: formatTextWithCode(option) }}
             />
-            {isSubmitted && expandedOption === index && (
+            {isSubmitted && index === selectedOption && (
               <div 
                 className="explanation"
                 dangerouslySetInnerHTML={{ __html: formatTextWithCode(explanations[index]) }}
@@ -62,7 +43,7 @@ const Options = ({ options, correctAnswer, explanations, onSelect, onNextQuestio
         ))}
       </div>
       {!isSubmitted && selectedOption !== null && (
-        <button className="submit-button" onClick={handleSubmit}>
+        <button className="submit-button" onClick={onSubmit}>
           Submit
         </button>
       )}
