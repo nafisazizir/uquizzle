@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
   webpack: {
     configure: (webpackConfig, { env, paths }) => {
-      return {
+      const config = {
         ...webpackConfig,
         entry: {
           main: [env === 'development' && require.resolve('react-dev-utils/webpackHotDevClient'), paths.appIndexJs].filter(Boolean),
@@ -22,7 +22,22 @@ module.exports = {
           ...webpackConfig.resolve,
           extensions: [...webpackConfig.resolve.extensions, '.jsx'],
         },
-      }
+      };
+
+      // Add rule for SVG files
+      config.module.rules.push({
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'static/media/[name].[hash:8].[ext]',
+            },
+          },
+        ],
+      });
+
+      return config;
     },
   },
   plugins: [
