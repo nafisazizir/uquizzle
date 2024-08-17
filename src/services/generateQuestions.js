@@ -1,10 +1,10 @@
 import { generateObject } from "ai";
 import { openai } from "./openai";
 import { z } from "zod";
-import { preprocessTranscript } from "./transcript";
+import { getContent } from "./transcript";
 
 export const generateQuestions = async (transcriptText) => {
-  const content = await preprocessTranscript(transcriptText);
+  const content = await getContent(transcriptText);
 
   const prompt = `Based on the following content, generate multiple-choice questions (MCQs). Each MCQ should include:
       - The question text
