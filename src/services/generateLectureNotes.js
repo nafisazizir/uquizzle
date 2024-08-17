@@ -5,6 +5,7 @@ import { getContent, getContentTimestamp } from "./transcript";
 
 export const generateLectureNotes = async (transcriptText) => {
   const content = await getContentTimestamp(transcriptText);
+  const contentJsonString = JSON.stringify(content, null, 2);
 
   const prompt = `You are an expert in generating comprehensive lecture notes. Based on the following content, generate detailed lecture notes that capture all relevant course material, ensuring that no important content is missed. Your task is to identify, categorize, and infer all core course-related information while excluding unimportant or filler content.
 
@@ -60,7 +61,7 @@ export const generateLectureNotes = async (transcriptText) => {
 
   Content:
 
-  ${content}`;
+  ${contentJsonString}`;
 
   const { object: generatedNotes } = await generateObject({
     model: openai("gpt-4o-mini"),
