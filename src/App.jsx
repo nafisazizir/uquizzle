@@ -1,6 +1,7 @@
 /* global chrome */
 import React, { useState, useEffect, useCallback } from "react";
 import { generateQuestions } from "./services/generateQuestions";
+import { generateLectureNotes } from "./services/generateLectureNotes";
 import "./App.css";
 
 const App = () => {
@@ -8,6 +9,9 @@ const App = () => {
   const [transcriptText, setTranscriptText] = useState("");
   const [isMinimized, setIsMinimized] = useState(false);
   const [questions, setQuestions] = useState("");
+  const [lectureNotes, setLectureNotes] = useState(
+    "No lecture notes generated yet."
+  );
 
   useEffect(() => {
     const messageListener = (message, sender, sendResponse) => {
@@ -62,6 +66,16 @@ const App = () => {
           ? transcriptText
           : "Successfully got the transcript"}
       </pre>
+
+      <button
+        onClick={async () => {
+          const result = await generateLectureNotes(transcriptText);
+          setLectureNotes(result);
+        }}
+      >
+        Generate Lecture Notes
+      </button>
+      <pre>{JSON.stringify(lectureNotes, null, 2)}</pre>
 
       <button
         onClick={async () => {
