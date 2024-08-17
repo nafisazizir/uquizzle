@@ -42,25 +42,6 @@ const App = () => {
     chrome.runtime.sendMessage({ action: "JUMP_TIMESTAMP", timestamp });
   };
 
-  const toggleSidebar = () => {
-    setIsMinimized(!isMinimized);
-    const sidebar = document.getElementById("echo360-transcriber-sidebar");
-    const toggleButton = document.getElementById("echo360-transcriber-toggle");
-    const body = document.body;
-
-    if (isMinimized) {
-      sidebar.classList.remove("minimized");
-      toggleButton.classList.remove("minimized");
-      toggleButton.textContent = "Minimize";
-      body.classList.add("sidebar-open");
-    } else {
-      sidebar.classList.add("minimized");
-      toggleButton.classList.add("minimized");
-      toggleButton.textContent = "Expand";
-      body.classList.remove("sidebar-open");
-    }
-  };
-
   return (
     <SidebarBase>
       <div className="App">
@@ -83,35 +64,31 @@ const App = () => {
           Generate Lecture Notes
         </button>
         <pre>{JSON.stringify(lectureNotes, null, 2)}</pre>
-      <button
-        onClick={async () => {
-          const result = await generateQuestions(transcriptText);
-          setQuestions(result);
-        }}
-      >
-        Generate Questions
-      </button>
-      <div>
-        {questions.length === 0 ? (
-          <p>No questions generated yet.</p>
-        ) : (
-          <ul>
-            {questions.map((questionData, index) => (
-              <li key={index} className="mb-4">
-                <ul className="list-disc pl-4">
-                  {questionData.options.map((option, optionIndex) => (
-                    <li key={optionIndex}>{option}</li>
-                  ))}
-                </ul>
-                <div>
-                  ////////////////
-                </div>
-              </li>
-
-            ))}
-          </ul>
-        )}
-
+        <button
+          onClick={async () => {
+            const result = await generateQuestions(transcriptText);
+            setQuestions(result);
+          }}
+        >
+          Generate Questions
+        </button>
+        <div>
+          {questions.length === 0 ? (
+            <p>No questions generated yet.</p>
+          ) : (
+            <ul>
+              {questions.map((questionData, index) => (
+                <li key={index} className="mb-4">
+                  <ul className="list-disc pl-4">
+                    {questionData.options.map((option, optionIndex) => (
+                      <li key={optionIndex}>{option}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
       </div>
     </SidebarBase>
   );
