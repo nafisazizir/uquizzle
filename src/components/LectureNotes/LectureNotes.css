@@ -111,11 +111,13 @@ ul {
 
 .grid-wrapper {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     width: fit-content;
     height: 100%;
     margin: 0 auto;
+    gap: 10px;
 }
 
 .each-topic {

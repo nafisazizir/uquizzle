@@ -4,6 +4,8 @@ import { ReactComponent as MadeLove } from "../../assets/madelove.svg";
 import { generateLectureNotes } from '../../services/generateLectureNotes';
 import { convertLectureNotesToMarkdownAndDownload } from '../../services/download';
 import "./LectureNotes.css";
+import Sparkles from "../Star";
+import PulsatingRotatingSVG from "../PulsatingSVG";
 
 const LectureNotes = ( { transcriptText, onNavigate, lectureTitle }) => {
     const [isGenerating, setIsGenerating] = useState(true);
@@ -31,6 +33,11 @@ const LectureNotes = ( { transcriptText, onNavigate, lectureTitle }) => {
             <div className="notes-content">
                 { isGenerating ? (
                     <div className="grid-wrapper">
+                        <Sparkles>
+                            <div className='center-waiting-logo'>
+                                <PulsatingRotatingSVG/>
+                            </div>
+                        </Sparkles>  
                         <div className="grid">
                             <div className="waiting-screen">
                                 <div className="ai-generate-text">AI is generating your <span style={{color: "#d5016c"}}>notes...</span></div>
