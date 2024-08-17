@@ -151,3 +151,11 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     }
   }
 });
+
+chrome.runtime.sendMessage({ action: 'GET_LECTURE_DATA' }, (response) => {
+  if (response) {
+    console.log('Received lecture data here:', response);
+  } else {
+    console.error('No lecture data found.');
+  }
+});
