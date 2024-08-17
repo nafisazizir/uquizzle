@@ -36,12 +36,57 @@
     align-self: stretch;
     color: #6b6b6b;
     font-family: "Inter-Bold", Helvetica;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 400;
     letter-spacing: 0;
     line-height: normal;
     position: relative;
     text-align: center;
+}
+
+.frame-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.frame {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+}
+
+.logo-wrapper {
+    height: 103.15px;
+    position: relative;
+    width: 108.17px;
+}
+
+.logo {
+    height: 103px;
+    position: relative;
+    width: 111px;
+}
+
+.div {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 165px;
+    height: 100%;
+    position: relative;
+    top: 24px;
+    width: 249px;
+}
+
+.div-2 {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 257px;
+    position: relative;
 }
 
 .div-3 {
@@ -56,6 +101,7 @@
     align-items: center;
     align-self: stretch;
     background-color: rgba(213, 1, 108, 1);
+    color: #ffffff;
     border-radius: 22px;
     box-shadow: 0px 3.67px 18.34px #d5016c80;
     display: flex;
@@ -66,6 +112,19 @@
     padding: 8px 80px;
     position: relative;
     width: 100%;
+    border: none;
+}
+
+.text-wrapper {
+    columns: #000000;
+    font-family: "Inter-Bold", Helvetica;
+    font-size: 37.2px;
+    font-weight: 500;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    text-align: center;
+    width: fit-content;
 }
 
 .text-wrapper-2 {
@@ -84,7 +143,7 @@
     align-self: stretch;
     color: #231f20;
     flex: 1;
-    font-family: "Inter-Bold", Helvetica;
+    font-family: "Inter-Medium", Helvetica;
     font-size: 12px;
     font-weight: 500;
     letter-spacing: 0;
@@ -95,4 +154,30 @@
 
 .text-wrapper-4 {
     color: #af0159
+}
+
+.div-4 {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    position: relative;
+}
+
+.rectangle {
+    height: 20px;
+    margin-right: -93px;
+    opacity: 0;
+    position: relative;
+    width: 253px;
+}
+
+.rectangle-wrapper {
+    align-items: center;
+    display: flex;
+    flex: 0 0 auto;
+    gap: 99px;
+    justify-content: space-around;
+    position: relative;
+    width: 160px;
 }

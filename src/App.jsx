@@ -8,7 +8,7 @@ import QuizScreen from "./screens/QuizScreen";
 import NotesScreen from "./screens/NotesScreen";
 import "./components/SidebarBase/SidebarBase.css";
 import "./App.css";
-import { Welcome } from "./components/Welcome";
+import WelcomeScreen from "./screens/WelcomeScreen";
 
 // Function to format text and wrap code snippets in <code> tags
 function formatTextWithCode(text) {
@@ -21,7 +21,7 @@ function formatTextWithCode(text) {
 }
 
 const App = () => {
-  const [currentScreen, setCurrentScreen] = useState("home");
+  const [currentScreen, setCurrentScreen] = useState("welcome");
   const [lectureTitle, setLectureTitle] = useState("");
   const [transcriptText, setTranscriptText] = useState("");
   const [questions, setQuestions] = useState([]);
@@ -56,6 +56,10 @@ const App = () => {
 
   const renderScreen = () => {
     switch (currentScreen) {
+      case "welcome":
+        return <WelcomeScreen
+          onNavigate={setCurrentScreen}
+        />;
       case "home":
         return <HomeScreen 
           onNavigate={setCurrentScreen}
@@ -77,13 +81,12 @@ const App = () => {
           onNavigate={setCurrentScreen}
         />;
       default:
-        return <HomeScreen onNavigate={setCurrentScreen} />;
+        return <WelcomeScreen onNavigate={setCurrentScreen} />;
     }
   };
 
   return (
     <SidebarBase>
-      <Welcome />
       <div className="App">
         {renderScreen()}
       </div>
