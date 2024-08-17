@@ -92,16 +92,16 @@ const App = () => {
           <ul>
             {questions.map((questionData, index) => (
               <li key={index} className="mb-4">
-                <div className="font-bold">{questionData.questions}</div>
                 <ul className="list-disc pl-4">
                   {questionData.options.map((option, optionIndex) => (
                     <li key={optionIndex}>{option}</li>
                   ))}
                 </ul>
-                <div className="text-sm text-gray-500">
-                  Correct Option Index: {questionData.correctOptionIndex}
+                <div>
+                  ////////////////
                 </div>
               </li>
+
             ))}
           </ul>
         )}
