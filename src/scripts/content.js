@@ -21,24 +21,25 @@ const injectSidebar = () => {
   const toggleButton = document.createElement('button');
   toggleButton.id = 'echo360-transcriber-toggle';
   toggleButton.innerHTML = logo;
-  toggleButton.style.top = '10px';
-  toggleButton.style.right = '310px';
+  toggleButton.style.top = '75px';
+  toggleButton.style.right = '330px';
 
-  toggleButton.onclick = (e) => {
-    if (!isDragging) {
-      const sidebar = document.getElementById('echo360-transcriber-sidebar');
-      const body = document.body;
-      sidebar.classList.toggle('minimized');
-      toggleButton.classList.toggle('minimized');
-      body.classList.toggle('sidebar-open');
-      // Remove this line as it's overwriting the SVG
-      // toggleButton.textContent = sidebar.classList.contains('minimized') ? 'Expand' : 'Minimize';
-    }
-  };
-
+  let isMinimized = false;
   let isDragging = false;
   let dragStartX, dragStartY;
   let buttonStartX, buttonStartY;
+
+  const toggleSidebar = () => {
+    if (!isDragging) {
+      isMinimized = !isMinimized;
+      const sidebarBase = document.querySelector('.sidebar-base');
+      if (sidebarBase) {
+        sidebarBase.classList.toggle('minimized', isMinimized);
+        toggleButton.classList.toggle('minimized', isMinimized);
+        document.body.classList.toggle('sidebar-open', !isMinimized);
+      }
+    }
+  };
 
   const startDragging = (e) => {
     isDragging = true;
@@ -72,6 +73,7 @@ const injectSidebar = () => {
     toggleButton.style.right = 'auto';
   };
 
+  toggleButton.addEventListener('click', toggleSidebar);
   toggleButton.addEventListener('mousedown', startDragging);
   document.addEventListener('mousemove', drag);
   document.addEventListener('mouseup', stopDragging);

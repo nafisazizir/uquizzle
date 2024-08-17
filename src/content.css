@@ -11,42 +11,25 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white; /* Make button background transparent */
+    background-color: white;
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
   
   #echo360-transcriber-toggle:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover for better feedback */
-}
-
-  #echo360-transcriber-toggle svg {
-    width: 29px; /* Match the SVG's original width */
-    height: 26px; /* Match the SVG's original height */
-    transition: transform 0.3s ease-in-out;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
   
+  #echo360-transcriber-toggle svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease-in-out;
+  }
   
   #echo360-transcriber-toggle.minimized svg {
     transform: rotate(180deg);
   }
   
-  /* Add styles for the sidebar */
-  #echo360-transcriber-sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 100vh;
-    background-color: white;
-    transition: transform 0.3s ease-in-out;
-    z-index: 9999;
-  }
-  
-  #echo360-transcriber-sidebar.minimized {
-    transform: translateX(100%);
-  }
-  
   body.sidebar-open {
-    margin-right: 300px;
+    margin-right: 320px;
   }

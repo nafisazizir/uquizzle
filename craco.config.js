@@ -24,6 +24,12 @@ module.exports = {
         },
       };
 
+      // Modify the rule for CSS files
+      const cssRule = config.module.rules.find(rule => rule.test && rule.test.toString().includes('.css'));
+      if (cssRule) {
+        cssRule.use = ['style-loader', 'css-loader'];
+      }
+
       // Add rule for SVG files
       config.module.rules.push({
         test: /\.svg$/,

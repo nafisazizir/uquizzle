@@ -23,6 +23,9 @@ dependencies:
   ai:
     specifier: ^3.3.9
     version: 3.3.9(react@18.3.1)(svelte@4.2.18)(vue@3.4.38)(zod@3.23.8)
+  css-loader:
+    specifier: ^7.1.2
+    version: 7.1.2(webpack@5.93.0)
   file-loader:
     specifier: ^6.2.0
     version: 6.2.0(webpack@5.93.0)
@@ -35,6 +38,9 @@ dependencies:
   react-scripts:
     specifier: 5.0.1
     version: 5.0.1(@babel/plugin-syntax-flow@7.24.7)(@babel/plugin-transform-react-jsx@7.25.2)(eslint@8.57.0)(react@18.3.1)(typescript@5.5.4)
+  style-loader:
+    specifier: ^4.0.0
+    version: 4.0.0(webpack@5.93.0)
   web-vitals:
     specifier: ^2.1.4
     version: 2.1.4
@@ -4478,6 +4484,29 @@ packages:
     peerDependencies:
       '@rspack/core': 0.x || 1.x
       webpack: ^5.0.0
+    peerDependenciesMeta:
+      '@rspack/core':
+        optional: true
+      webpack:
+        optional: true
+    dependencies:
+      icss-utils: 5.1.0(postcss@8.4.41)
+      postcss: 8.4.41
+      postcss-modules-extract-imports: 3.1.0(postcss@8.4.41)
+      postcss-modules-local-by-default: 4.0.5(postcss@8.4.41)
+      postcss-modules-scope: 3.2.0(postcss@8.4.41)
+      postcss-modules-values: 4.0.0(postcss@8.4.41)
+      postcss-value-parser: 4.2.0
+      semver: 7.6.3
+      webpack: 5.93.0
+    dev: false
+
+  /css-loader@7.1.2(webpack@5.93.0):
+    resolution: {integrity: sha512-6WvYYn7l/XEGN8Xu2vWFt9nVzrCn39vKyTEFf/ExEyoksJjjSZV/0/35XPlMbpnr6VGhZIUg5yJrL8tGfes/FA==}
+    engines: {node: '>= 18.12.0'}
+    peerDependencies:
+      '@rspack/core': 0.x || 1.x
+      webpack: ^5.27.0
     peerDependenciesMeta:
       '@rspack/core':
         optional: true
@@ -10361,6 +10390,15 @@ packages:
     engines: {node: '>= 12.13.0'}
     peerDependencies:
       webpack: ^5.0.0
+    dependencies:
+      webpack: 5.93.0
+    dev: false
+
+  /style-loader@4.0.0(webpack@5.93.0):
+    resolution: {integrity: sha512-1V4WqhhZZgjVAVJyt7TdDPZoPBPNHbekX4fWnCJL1yQukhCeZhJySUL+gL9y6sNdN95uEOS83Y55SqHcP7MzLA==}
+    engines: {node: '>= 18.12.0'}
+    peerDependencies:
+      webpack: ^5.27.0
     dependencies:
       webpack: 5.93.0
     dev: false
