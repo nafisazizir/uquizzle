@@ -5,6 +5,7 @@ import Header from '../components/Header/index';
 import ProgressIndicator from '../components/ProgressIndicator/index';
 import Question from '../components/Question/index';
 import Options from '../components/Options/index';
+import WaitingScreen from './WaitingScreen';
 import './QuizScreen.css';
 
 function formatTextWithCode(text) {
@@ -74,7 +75,7 @@ const QuizScreen = ({ transcriptText, onNavigate }) => {
     };
   
     if (questions.length === 0) {
-      return <div>Loading questions...</div>;
+      return <WaitingScreen/>;
     }
   
     return (
