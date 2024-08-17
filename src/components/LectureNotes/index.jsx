@@ -59,7 +59,7 @@ const LectureNotes = ( { transcriptText, onNavigate, lectureTitle }) => {
             {/* Nav Buttons */}
             <div className="navigation-buttons">
                 <button class="quiz-button" onClick={() => onNavigate('quiz')}>Go to Quiz</button>
-                <button class="download-button" onClick={() => convertLectureNotesToMarkdownAndDownload(lectureTitle)}>Download Notes</button>
+                <button class="download-button" disabled={isGenerating} onClick={() => convertLectureNotesToMarkdownAndDownload(lectureTitle)}>Download Notes</button>
                 <button class="dashboard-button-2" onClick={() => onNavigate('home')}>Back to Dashboard</button>
             </div>
             

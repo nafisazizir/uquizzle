@@ -41,6 +41,14 @@ ul {
     width: 100%;
 }
 
+.download-button:disabled {
+    background-color: white;
+    color: lightgray;
+    border: 1px solid;
+    border-color: lightgray;
+    cursor: not-allowed;
+  }
+
 .dashboard-button-2 {
     align-items: center;
     background-color: white;
