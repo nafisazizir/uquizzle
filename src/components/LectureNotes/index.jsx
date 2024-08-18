@@ -56,7 +56,7 @@ const LectureNotes = ( { transcriptText, onNavigate, lectureTitle }) => {
                     <>
                         {lectureNotes.map((topic, index) => (
                             <div className="each-topic">
-                                <div key={index} className="topic">
+                                <div key={index}>
                                     <div className="content-title">{topic.title}</div>
                                     <ul>
                                         {topic.content.map((content, id) => (
