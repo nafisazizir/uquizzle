@@ -6,7 +6,7 @@ import './WaitingScreen.css'
 
 
 
-const WaitingScreen = () => {
+const WaitingScreen = ({isFeedback = false}) => {
     return(
         <div className='waiting-screen-container'>
             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="32" viewBox="0 0 50 32" fill="none">
@@ -24,7 +24,7 @@ const WaitingScreen = () => {
             </clipPath>
             </defs>
             </svg>
-            <CenterWaiting/>  
+            <CenterWaiting isFeedback={isFeedback} />  
             <p>Remember to pay attention to the lecture!</p>
             <Footer/>            
         </div>

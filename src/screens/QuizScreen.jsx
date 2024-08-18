@@ -8,7 +8,6 @@ import Options from "../components/Options/index";
 import WaitingScreen from "./WaitingScreen";
 import {
   convertQuestionToMarkdownAndDownload,
-  convertQuestionToPdfAndDownload,
 } from "../services/download";
 import "./QuizScreen.css";
 import { ReactComponent as Graduate } from "../assets/graduation.svg";
@@ -36,21 +35,9 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const localStorageQuestions = localStorage.getItem("questions");
-      if (localStorageQuestions) {
-        setQuestions(JSON.parse(localStorageQuestions));
-      } else {
-        const generatedQuestions = await generateQuestions(transcriptText);
-        setQuestions(generatedQuestions);
-        localStorage.setItem("questions", JSON.stringify(generatedQuestions));
-      }
+      const generatedQuestions = await generateQuestions(transcriptText);
+      setQuestions(generatedQuestions);
     };
-
-    const localStorageQuizResult = localStorage.getItem("quizResults");
-    if (localStorageQuizResult) {
-      setQuizResults(JSON.parse(localStorageQuizResult));
-    }
-
     fetchQuestions();
   }, [transcriptText]);
 
@@ -69,21 +56,28 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
         question_id: currentQuestion.question_id,
         user_choice: currentQuestion.options[selectedOption],
         is_correct: isCorrect
-      },
+      }
     ];
     setQuizResults(newQuizResults);
-    localStorage.setItem("quizResults", JSON.stringify(newQuizResults))
 
-    setUserAnswers({ ...userAnswers, [currentQuestionIndex]: selectedOption });
-    setAnsweredQuestions([
-      ...new Set([...answeredQuestions, currentQuestionIndex]),
-    ]);
+    setUserAnswers({...userAnswers, [currentQuestionIndex]: selectedOption});
+    setAnsweredQuestions([...new Set([...answeredQuestions, currentQuestionIndex])]);
     setIsSubmitted(true);
 
-    // If this is the last question, log the results
     if (currentQuestionIndex === questions.length - 1) {
-      console.log("Quiz Results:", newQuizResults);
+      handleQuizCompletion(newQuizResults);
     }
+  };
+
+  const handleQuizCompletion = (results) => {
+    const score = calculateScore(results);
+    setTotalScore(score);
+    setQuizCompleted(true);
+  };
+
+  const calculateScore = (results) => {
+    const correctAnswers = results.filter(result => result.is_correct).length;
+    return `${correctAnswers}`;
   };
 
   const handleNextQuestion = () => {
@@ -92,8 +86,7 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
       setSelectedOption(null);
       setIsSubmitted(false);
     } else {
-      setTotalScore(calculateScore());
-      setQuizCompleted(true);
+      handleQuizCompletion(quizResults);
     }
   };
 
@@ -124,14 +117,15 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
     }
   };
 
-  const handleFeedback = () => {
-    onNavigate("feedback");
-  }
 
-  const calculateScore = () => {
-    const correctAnswers = quizResults.filter(quizResults => quizResults.is_correct).length;
-    return `${correctAnswers}/${quizResults.length}`;
-  }
+  const handleViewFeedback = () => {
+    onNavigate("feedback", { 
+      transcriptText, 
+      questions, 
+      quizResults, 
+      score: totalScore 
+    });
+  };
 
   if (questions.length === 0) {
     return <WaitingScreen />;
@@ -156,7 +150,7 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
             </p>
             <p style={{
               marginTop:"0px",
-            }}>See your detailed feedback, <span className="here" onClick={() => onNavigate(handleFeedback)}>here</span>!</p>
+            }}>See your detailed feedback, <span className="here" onClick={() => onNavigate(handleViewFeedback)}>here</span>!</p>
           </div>
           <Graduate/>
 
@@ -167,10 +161,7 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
           </p>
 
           <div className="completion-buttons">
-            <button
-              className="review-button"
-              onClick={() => console.log("Review Lecture Notes")}
-            >
+            <button className="review-button" onClick={() => onNavigate("notes")}>
               Review Lecture Notes
             </button>
             <button className="download-button" onClick={handleDownloadQuizzes}>
