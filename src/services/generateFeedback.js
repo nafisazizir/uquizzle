@@ -140,5 +140,6 @@ export const generateFeedback = async (
     }),
   });
 
+  console.log(userPerformance)
   return userPerformance;
 };
