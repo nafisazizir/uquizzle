@@ -14,6 +14,9 @@ import "./QuizScreen.css";
 import { ReactComponent as Graduate } from "../assets/graduation.svg";
 
 function formatTextWithCode(text) {
+  if (text == null || text== undefined) {
+    return '';
+  }
   const codePattern = /`(.*?)`/g;
   const inlineStyles = `
     background-color: #d4d4d4;
@@ -43,7 +46,7 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [quizResults, setQuizResults] = useState([]);
-  const [totalScore, setTotalScore] = useState("0/10");
+  const [totalScore, setTotalScore] = useState("");
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -64,8 +67,43 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
       setQuizResults(JSON.parse(localStorageQuizResult));
     }
 
+    const loadQuizProgress = () => {
+      const savedQuestionIndex = localStorage.getItem("currentQuestionIndex");
+      const savedAnsweredQuestions = localStorage.getItem("answeredQuestions");
+      const savedUserAnswers = localStorage.getItem("userAnswers");
+      const savedQuizResults = localStorage.getItem("quizResults");
+      const savedQuizCompleted = localStorage.getItem("quizCompleted");
+      const savedTotalScore = localStorage.getItem("totalScore");
+
+      if (savedQuestionIndex) setCurrentQuestionIndex(parseInt(savedQuestionIndex));
+      if (savedAnsweredQuestions) setAnsweredQuestions(JSON.parse(savedAnsweredQuestions));
+      if (savedUserAnswers) setUserAnswers(JSON.parse(savedUserAnswers));
+      if (savedQuizResults) setQuizResults(JSON.parse(savedQuizResults));
+      if (savedQuizCompleted) setQuizCompleted(JSON.parse(savedQuizCompleted));
+      if (savedTotalScore) setTotalScore(JSON.parse(savedTotalScore));
+    };
     fetchQuestions();
+    loadQuizProgress();
+    const handleBeforeUnload = () => {
+      handleResetQuiz();
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
   }, [transcriptText]);
+
+  useEffect(() => {
+    localStorage.setItem("currentQuestionIndex", currentQuestionIndex);
+    localStorage.setItem("answeredQuestions", JSON.stringify(answeredQuestions));
+    localStorage.setItem("userAnswers", JSON.stringify(userAnswers));
+    localStorage.setItem("quizResults", JSON.stringify(quizResults));
+    localStorage.setItem("quizCompleted", JSON.stringify(quizCompleted));
+    localStorage.setItem("totalScore", JSON.stringify(totalScore));
+  }, [currentQuestionIndex, answeredQuestions, userAnswers, quizResults, quizCompleted, totalScore]);
 
   const handleOptionSelect = (optionIndex) => {
     if (!isSubmitted) {
@@ -85,7 +123,6 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
       },
     ];
     setQuizResults(newQuizResults);
-    localStorage.setItem("quizResults", JSON.stringify(newQuizResults))
 
     setUserAnswers({ ...userAnswers, [currentQuestionIndex]: selectedOption });
     setAnsweredQuestions([
@@ -93,7 +130,6 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
     ]);
     setIsSubmitted(true);
 
-    // If this is the last question, log the results
     if (currentQuestionIndex === questions.length - 1) {
       console.log("Quiz Results:", newQuizResults);
     }
@@ -149,6 +185,21 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
       quizResults, 
       score: totalScore 
     });
+  };
+
+  const handleResetQuiz = () => {
+    localStorage.removeItem("currentQuestionIndex");
+    localStorage.removeItem("answeredQuestions");
+    localStorage.removeItem("userAnswers");
+    localStorage.removeItem("quizResults");
+    localStorage.removeItem("quizCompleted");
+    localStorage.removeItem("totalScore");
+    setCurrentQuestionIndex(0);
+    setAnsweredQuestions([]);
+    setUserAnswers({});
+    setQuizResults([]);
+    setQuizCompleted(false);
+    setTotalScore("0/10");
   };
 
   if (questions.length === 0) {
