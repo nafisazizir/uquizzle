@@ -25,7 +25,12 @@ const WaitingScreen = () => {
             </defs>
             </svg>
             <CenterWaiting/>  
-            <p>Remember to pay attention to the lecture!</p>
+            {/* <p style={{
+                color: "#6E6E6E",
+                textAlign: "center",
+                fontSize: "14px",
+                fontStyle: "italic",
+                }} >Remember to pay attention to the lecture!</p> */}
             <Footer/>            
         </div>
     )

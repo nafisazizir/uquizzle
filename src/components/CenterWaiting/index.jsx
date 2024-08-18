@@ -15,7 +15,15 @@ const CenterWaiting= () => {
             <Sparkles>
                 <div className='center-waiting-text'>
                     <h5>AI is curating your <span className="highlight-text">quizzles</span></h5>
-                    <h6>Questions will pop up here as you watch the lecture</h6>
+                    {/* <h6 style={{
+                fontSize: "14px"
+                }} >Questions will pop up here as you watch the lecture</h6> */}
+                <p style={{
+                color: "#6E6E6E",
+                textAlign: "center",
+                fontSize: "14px",
+                fontWeight: "400"
+                }} >Remember to pay attention to the lecture!</p>
                 </div>  
             </Sparkles>
             

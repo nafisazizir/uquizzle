@@ -66,7 +66,7 @@ const HomeScreen = ({ onNavigate, lectureTitle, handleTranscribe, transcriptText
             justifyContent: "center",
             alignItems: "center",
             width: "100%",
-            padding: "0 20px",
+            padding: "8px 20px",
             boxSizing: "border-box",
             gap: 10,
           }}
@@ -86,10 +86,6 @@ const HomeScreen = ({ onNavigate, lectureTitle, handleTranscribe, transcriptText
             onClick={() => onNavigate("notes")}
             fullWidth={true}
           />
-      <button onClick={() => convertQuestionToMarkdownAndDownload(lectureTitle)}>Download Question</button>
-      <button onClick={() => convertLectureNotesToMarkdownAndDownload(lectureTitle)}>Download Lecture Notes</button>
-      <button onClick={handleGenerateFeedback}>Generate Feedback</button>
-      <button onClick={() => onNavigate("feedback")}>Feedback</button>
         </div>
       </div>
 
@@ -105,7 +101,6 @@ const HomeScreen = ({ onNavigate, lectureTitle, handleTranscribe, transcriptText
       >
         <MadeLove />
       </div>
-      <pre>{JSON.stringify(userPerformance, null, 2)}</pre>
     </div>
   );
 };
