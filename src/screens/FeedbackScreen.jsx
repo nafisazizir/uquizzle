@@ -58,63 +58,81 @@ const FeedbackScreen = ({ onNavigate, transcriptText, questions, quizResults, sc
       </div>
       
       <div className={`feedback-container ${isPositiveOpen ? 'open' : ''}`}>
-        {feedback.strength.map((item, index) => (
-          <div key={index} className="feedback-item">
-            <div className="topic">
-              <h3>Topic {index + 1}: {item.topic}</h3>
-              <p className={`accuracy ${item.accuracy >= 60 ? 'high' : 'low'}`}>{item.accuracy}%</p>
-            </div>
-            <div className="keypoints">
-              <h3 className="key">Key points:</h3>
-              <ul>
-                {item.keyPoints.map((point, idx) => (
-                  <li key={idx}>{point}</li>
-                ))}
-              </ul>
-            </div> 
+        {feedback.strength.length === 0 ? (
+          <div className="feedback-item">
+            <p>None</p>
           </div>
-        ))}
+        ) : (
+          feedback.strength.map((item, index) => (
+            <div key={index} className="feedback-item">
+              <div className="topic">
+                <h3>Topic {index + 1}: {item.topic}</h3>
+                <p className={`accuracy ${item.accuracy >= 60 ? 'high' : 'low'}`}>{item.accuracy}%</p>
+              </div>
+              <div className="keypoints">
+                <h3 className="key">Key points:</h3>
+                <ul>
+                  {item.keyPoints.map((point, idx) => (
+                    <li key={idx}>{point}</li>
+                  ))}
+                </ul>
+              </div> 
+            </div>
+          ))
+        )}
       </div>
 
       <div className="aspect" onClick={() => setIsNegativeOpen(!isNegativeOpen)}>
         <h3>Negative</h3>
         <p className={`arrow ${isNegativeOpen ? 'up' : 'down'}`}>▼</p>
       </div>
-      
+
       <div className={`feedback-container ${isNegativeOpen ? 'open' : ''}`}>
-        {feedback.weakness.map((item, index) => (
-          <div key={index} className="feedback-item">
-            <div className="topic">
-              <h3>Topic {index + 1}: {item.topic}</h3>
-              <p className={`accuracy ${item.accuracy >= 60 ? 'high' : 'low'}`}>{item.accuracy}%</p>
-            </div>
-            <div className="keypoints">
-              <h3 className="key">Key points:</h3>
-              <ul>
-                {item.keyPoints.map((point, idx) => (
-                  <li key={idx}>{point}</li>
-                ))}
-              </ul>
-            </div> 
+        {feedback.weakness.length === 0 ? (
+          <div className="feedback-item">
+            <p>None</p>
           </div>
-        ))}
+        ) : (
+          feedback.weakness.map((item, index) => (
+            <div key={index} className="feedback-item">
+              <div className="topic">
+                <h3>Topic {index + 1}: {item.topic}</h3>
+                <p className={`accuracy ${item.accuracy >= 60 ? 'high' : 'low'}`}>{item.accuracy}%</p>
+              </div>
+              <div className="keypoints">
+                <h3 className="key">Key points:</h3>
+                <ul>
+                  {item.keyPoints.map((point, idx) => (
+                    <li key={idx}>{point}</li>
+                  ))}
+                </ul>
+              </div> 
+            </div>
+          ))
+        )}
       </div>
 
       <div className="aspect" onClick={() => setIsRecommendationOpen(!isRecommendationOpen)}>
         <h3>Recommendation</h3>
         <p className={`arrow ${isRecommendationOpen ? 'up' : 'down'}`}>▼</p>
       </div>
-      
+
       <div className={`feedback-container ${isRecommendationOpen ? 'open' : ''}`}>
-        <div className="feedback-item">
-          <div className="keypoints">
-            <ul>
-              {feedback.recommendation.map((item, index) => (
-                <li key={index}>{item}</li>
-              ))}
-            </ul>
+        {feedback.recommendation.length === 0 ? (
+          <div className="feedback-item">
+            <p>None</p>
           </div>
-        </div>
+        ) : (
+          <div className="feedback-item">
+            <div className="keypoints">
+              <ul>
+                {feedback.recommendation.map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="completion">
