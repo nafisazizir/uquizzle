@@ -160,10 +160,6 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
             <button className="feedback-button" onClick={handleViewFeedback}>
               View Detailed Feedback
             </button>
-            <button
-              className="review-button"
-              onClick={() => console.log("Review Lecture Notes")}
-            >
             <button className="review-button" onClick={() => onNavigate("notes")}>
               Review Lecture Notes
             </button>
