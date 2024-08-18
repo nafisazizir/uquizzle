@@ -8,15 +8,27 @@ import Options from "../components/Options/index";
 import WaitingScreen from "./WaitingScreen";
 import {
   convertQuestionToMarkdownAndDownload,
+  convertQuestionToPdfAndDownload,
 } from "../services/download";
 import "./QuizScreen.css";
 
 function formatTextWithCode(text) {
-  const codePattern = /'''(.*?)'''/g;
+  const codePattern = /`(.*?)`/g;
+  const inlineStyles = `
+    background-color: #d4d4d4;
+    border-radius: 3px;
+    font-family: 'Courier New', Courier, monospace;
+    padding: 2px 5px;
+    color: #000000;
+    font-weight: 200;
+    font-size: '10px';
+    white-space: pre-wrap;
+    display: inline-block;
+  `;
   return text
     .split(codePattern)
     .map((segment, index) =>
-      index % 2 === 1 ? `<code>${segment}</code>` : segment
+      index % 2 === 1 ? `<code style="${inlineStyles}">${segment}</code>` : segment
     )
     .join("");
 }
@@ -34,9 +46,23 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
 
   useEffect(() => {
     const fetchQuestions = async () => {
-      const generatedQuestions = await generateQuestions(transcriptText);
-      setQuestions(generatedQuestions);
+      const localStorageQuestions = localStorage.getItem("questions");
+      if (localStorageQuestions) {
+        setQuestions(JSON.parse(localStorageQuestions));
+      } else {
+        const generatedQuestions = await generateQuestions(transcriptText);
+        setQuestions(generatedQuestions);
+        localStorage.setItem("questions", JSON.stringify(generatedQuestions));
+        console.log(generatedQuestions)
+      }
     };
+
+
+    const localStorageQuizResult = localStorage.getItem("quizResults");
+    if (localStorageQuizResult) {
+      setQuizResults(JSON.parse(localStorageQuizResult));
+    }
+
     fetchQuestions();
   }, [transcriptText]);
 
@@ -55,28 +81,21 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
         question_id: currentQuestion.question_id,
         user_choice: currentQuestion.options[selectedOption],
         is_correct: isCorrect
-      }
+      },
     ];
     setQuizResults(newQuizResults);
+    localStorage.setItem("quizResults", JSON.stringify(newQuizResults))
 
-    setUserAnswers({...userAnswers, [currentQuestionIndex]: selectedOption});
-    setAnsweredQuestions([...new Set([...answeredQuestions, currentQuestionIndex])]);
+    setUserAnswers({ ...userAnswers, [currentQuestionIndex]: selectedOption });
+    setAnsweredQuestions([
+      ...new Set([...answeredQuestions, currentQuestionIndex]),
+    ]);
     setIsSubmitted(true);
 
+    // If this is the last question, log the results
     if (currentQuestionIndex === questions.length - 1) {
-      handleQuizCompletion(newQuizResults);
+      console.log("Quiz Results:", newQuizResults);
     }
-  };
-
-  const handleQuizCompletion = (results) => {
-    const score = calculateScore(results);
-    setTotalScore(score);
-    setQuizCompleted(true);
-  };
-
-  const calculateScore = (results) => {
-    const correctAnswers = results.filter(result => result.is_correct).length;
-    return `${correctAnswers}`;
   };
 
   const handleNextQuestion = () => {
@@ -85,7 +104,8 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
       setSelectedOption(null);
       setIsSubmitted(false);
     } else {
-      handleQuizCompletion(quizResults);
+      setTotalScore(calculateScore());
+      setQuizCompleted(true);
     }
   };
 
@@ -116,14 +136,10 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
     }
   };
 
-  const handleViewFeedback = () => {
-    onNavigate("feedback", { 
-      transcriptText, 
-      questions, 
-      quizResults, 
-      score: totalScore 
-    });
-  };
+  const calculateScore = () => {
+    const correctAnswers = quizResults.filter(quizResults => quizResults.is_correct).length;
+    return `${correctAnswers}/${quizResults.length}`;
+  }
 
   if (questions.length === 0) {
     return <WaitingScreen />;
@@ -157,10 +173,10 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
           <h3>Score: {totalScore}</h3>
 
           <div className="completion-buttons">
-            <button className="feedback-button" onClick={handleViewFeedback}>
-              View Detailed Feedback
-            </button>
-            <button className="review-button" onClick={() => onNavigate("notes")}>
+            <button
+              className="review-button"
+              onClick={() => console.log("Review Lecture Notes")}
+            >
               Review Lecture Notes
             </button>
             <button className="download-button" onClick={handleDownloadQuizzes}>
