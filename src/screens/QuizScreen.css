@@ -260,6 +260,7 @@
 .answer {
     color:var(--Danube, #559CCD);
     font-size: 50px;
+    font-weight: 700;
 }
 
 .scorename {
@@ -288,4 +289,7 @@
 
 .answer-text {
   color: black;
+  margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: 700;
 }

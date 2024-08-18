@@ -151,10 +151,12 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
 
           <div className="score">
             <h1 className="scorename">Score</h1>
-            <h2 className="answer-text">
+            <p className="answer-text">
               <span className="answer">{totalScore}</span>/10
-            </h2>
-            <p>See your detailed feedback, <span className="here" onClick={() => onNavigate(handleFeedback)}>here</span>!</p>
+            </p>
+            <p style={{
+              marginTop:"0px",
+            }}>See your detailed feedback, <span className="here" onClick={() => onNavigate(handleFeedback)}>here</span>!</p>
           </div>
           <Graduate/>
 
