@@ -164,12 +164,13 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
             <button className="review-button" onClick={() => onNavigate("notes")}>
               Review Lecture Notes
             </button>
-            <button className="download-button" onClick={handleDownloadQuizzes}>
+            <button className="download-button" onClick={handleDownloadQuizzes} style={{backgroundColor:"white", color:"rgba(213, 1, 108, 1)", border: "2px solid var(--strawbz) !important" }}>
               Download Quizzes
             </button>
             <button
               className="dashboard-button"
               onClick={handleBackToDashboard}
+              style={{backgroundColor:"white", color:"rgba(213, 1, 108, 1)" }}
             >
               Back to Dashboard
             </button>
