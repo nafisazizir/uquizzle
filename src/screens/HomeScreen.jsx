@@ -45,6 +45,7 @@ const HomeScreen = ({ onNavigate, lectureTitle, handleTranscribe, transcriptText
         width: "100%",
         textAlign: "center",
         flexGrow: 1,
+        gap: "16px",
       }}>
         <Product/>
         <h3 style={{
@@ -90,7 +91,7 @@ const HomeScreen = ({ onNavigate, lectureTitle, handleTranscribe, transcriptText
               fullWidth={true}
             />
           )}
-          
+
         </div>
       </div>
 
