@@ -10,9 +10,11 @@ const Options = ({
   onJumpTimestamp, 
   formatTextWithCode, 
   selectedOption, 
-  isSubmitted 
+  isSubmitted,
+  quizLastQuestion
 }) => {
   const [openExplanation, setOpenExplanation] = useState(null);
+  const [nextButtonText, setNextButtonText] = useState('Next Question');
 
   useEffect(() => {
     if (isSubmitted) {
@@ -37,6 +39,12 @@ const Options = ({
       setOpenExplanation(openExplanation === index ? null : index);
     }
   };
+
+  useEffect(() => {
+    if (quizLastQuestion) {
+      setNextButtonText('Finish Quiz');
+    }
+  }, [quizLastQuestion]);
 
   return (
     <div className="options">
@@ -67,7 +75,7 @@ const Options = ({
       {isSubmitted && (
         <div className="post-submit-buttons">
           <button className="next-question-button" onClick={onNextQuestion}>
-            Next Question
+            {nextButtonText}
           </button>
           <button className="timestamp-button" onClick={onJumpTimestamp}>
             Review Section

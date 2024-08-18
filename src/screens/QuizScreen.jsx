@@ -45,6 +45,7 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
+  const [quizLastQuestion, setQuizLastQuestion] = useState(false);
   const [quizResults, setQuizResults] = useState([]);
   const [totalScore, setTotalScore] = useState("");
 
@@ -136,7 +137,12 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
   };
 
   const handleNextQuestion = () => {
-    if (currentQuestionIndex < questions.length - 1) {
+    if (currentQuestionIndex == questions.length - 2) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+      setSelectedOption(null);
+      setIsSubmitted(false);
+      setQuizLastQuestion(true);
+    } else if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedOption(null);
       setIsSubmitted(false);
@@ -271,6 +277,7 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
             formatTextWithCode={formatTextWithCode}
             selectedOption={selectedOption}
             isSubmitted={isSubmitted}
+            quizLastQuestion={quizLastQuestion}
           />
         </>
       )}
