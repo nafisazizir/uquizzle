@@ -1,41 +1,58 @@
-#echo360-transcriber-sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px;
-    height: 100vh;
-    background-color: white;
-    box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-    z-index: 9999;
-    overflow-y: auto;
-    padding: 20px;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  #echo360-transcriber-sidebar.minimized {
-    transform: translateX(290px);
-  }
-  
-  #echo360-transcriber-toggle {
+#echo360-transcriber-toggle {
     position: fixed;
     z-index: 10000;
-    background-color: #007bff;
-    color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 5px;
     cursor: move;
     user-select: none;
     transition: 0.3s ease-in-out;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
   
   #echo360-transcriber-toggle:hover {
-    background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   }
   
-  body {
-    transition: padding-right 0.3s ease-in-out;
+  #echo360-transcriber-toggle svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  #echo360-transcriber-toggle.minimized svg {
+    transform: rotate(180deg);
   }
   
   body.sidebar-open {
-    padding-right: 300px;
+    margin-right: 320px;
+  }
+
+  .screen-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .navigation-buttons {
+    display: flex;
+    margin-top: auto;
+    padding-top: 5px;
+  }
+  
+  .notes-content {
+    height: 60vh;
+    overflow-y: auto;
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #efefef;
+    border-radius: 5px;
+    justify-content: left;
+    position: relative;
   }

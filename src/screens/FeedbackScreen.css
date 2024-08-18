@@ -1,0 +1,141 @@
+.accuracy {
+    margin: 0;
+    display: flex;
+    padding: 4px 8px;
+    align-items: center;
+    gap: 5px;
+    border-radius: 22.009px;
+    border: 1px solid;
+    font-size: 12px;
+}
+
+.accuracy.high {
+    border-color: var(--Danube, #559CCD);
+    color: #559CCD;
+}
+
+.accuracy.low {
+    border-color: #FF6B6B;
+    color: #FF6B6B;
+}
+
+.feedback-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+}
+
+.feedback-container.open {
+    max-height: 2500px;
+    transition: max-height 0.5s ease-in;
+    overflow: visible;
+}
+
+.feedback-item {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.aspect {
+    border: 1px solid #ccc;
+    border-radius: 22.01px;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px 16px;
+    cursor: pointer;
+    align-items: center;
+}
+
+.keypoints {
+    border: 1px solid #ccc;
+    border-radius: 22.01px;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 10px;
+    padding-top: 16px;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.topic {
+    border: 1px solid #ccc;
+    border-radius: 22.01px;
+    font-size: 16px;
+    text-align: left;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 8px 16px; 
+}
+
+.key {
+    padding: 0px 16px;
+    margin: 0px;    
+}
+
+h3 {
+    margin: 0px;
+}
+
+.arrow {
+    margin: 0px;
+    transition: transform 0.3s ease;
+}
+
+.arrow.up {
+    transform: rotate(180deg);
+}
+
+.arrow.down {
+    transform: rotate(0deg);
+}
+
+.dashboard-button {
+    background-color: var(--strawbz);
+    color: white;
+    border-radius: 22px;
+    width: 100%;
+    padding: 8px;
+    cursor:pointer
+  }
+
+.completion {
+    width: 100%;
+    cursor: pointer;
+}
+
+/* This class makes the element sticky */
+.sticky-header {
+    position: -webkit-sticky; /* For Safari support */
+    position: sticky;
+    top: 0; /* Sticks to the top of the viewport */
+    z-index: 1000; /* Ensures it stays on top of other content */
+    background-color: #fff; /* Background color to match the design */
+    padding: 10px; /* Adjust padding as needed */
+  }
+
+.score {
+    display: flex;
+    flex-direction: column;
+}
+
+.answer {
+    color:var(--Danube, #559CCD);
+    font-size: 50px;
+}
+
+.scorename {
+    margin-bottom: 0px;
+    font-size: 36px;
+}
+
+h2 {
+    font-size: 25px;
+    margin-top: 0px;
+}

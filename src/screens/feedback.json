@@ -1,0 +1,89 @@
+{
+    "strength": [
+      {
+        "topic": "Database Views",
+        "accuracy": 100,
+        "questionsCovered": [
+          1,
+          2
+        ],
+        "keyPoints": [
+          "You correctly identified the main purpose of using database views as improving performance.",
+          "You understood the three major reasons for using database views: performance, data partitioning, and security."
+        ]
+      },
+      {
+        "topic": "Triggers",
+        "accuracy": 100,
+        "questionsCovered": [
+          4,
+          10
+        ],
+        "keyPoints": [
+          "You accurately described the role of triggers in automatically enforcing constraints.",
+          "You understood the function of a trigger in executing specified actions based on conditions."
+        ]
+      },
+      {
+        "topic": "Dynamic Constraints",
+        "accuracy": 100,
+        "questionsCovered": [
+          6
+        ],
+        "keyPoints": [
+          "You correctly identified that dynamic constraints can change based on conditions."
+        ]
+      },
+      {
+        "topic": "Check Constraints",
+        "accuracy": 100,
+        "questionsCovered": [
+          7
+        ],
+        "keyPoints": [
+          "You understood the purpose of check constraints in ensuring data integrity by enforcing rules."
+        ]
+      }
+    ],
+    "weakness": [
+      {
+        "topic": "Static Constraints",
+        "accuracy": 0,
+        "questionsCovered": [
+          3
+        ],
+        "keyPoints": [
+          "You incorrectly defined static constraints, stating they can be modified at any time.",
+          "This indicates a misunderstanding of the concept that static constraints are always enforced throughout the database's lifetime."
+        ]
+      },
+      {
+        "topic": "Primary Key",
+        "accuracy": 0,
+        "questionsCovered": [
+          8
+        ],
+        "keyPoints": [
+          "You mistakenly stated that a primary key allows for duplicate records.",
+          "This shows a lack of understanding of the fundamental role of primary keys in uniquely identifying records in a table."
+        ]
+      },
+      {
+        "topic": "Constraint Validation",
+        "accuracy": 0,
+        "questionsCovered": [
+          5
+        ],
+        "keyPoints": [
+          "You believed that enabling a database constraint with validation only checks new data for compliance.",
+          "This indicates a misunderstanding of the process where all existing data is checked for compliance when a constraint is enabled with validation."
+        ]
+      }
+    ],
+    "recommendation": [
+      "Review the definitions and characteristics of static constraints, focusing on their enforcement throughout the database's lifetime.",
+      "Study the role of primary keys in database design, emphasizing their uniqueness and importance in relational databases.",
+      "Understand the implications of enabling constraints with validation, ensuring clarity on how existing data is treated."
+    ]
+  }
+  

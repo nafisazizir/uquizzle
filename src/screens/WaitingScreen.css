@@ -1,0 +1,16 @@
+.waiting-screen-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 90vh;
+  padding: 0 20px;
+  position: relative;
+  overflow: hidden; /* Prevent overflow if stars are slightly outside the container */
+}
+
+.lecture-reminder {
+  padding-bottom: 80px;
+  font-size: 12px;
+  font-style: italic;
+}

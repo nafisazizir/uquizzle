@@ -1,70 +1,34 @@
-# Getting Started with Create React App
+# UQuizzle
+![alt text](image.png)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Chrome extension designed to assist students with their studies by integrating AI-powered tools directly into the Echo360 video player where the lecture recordings are. The extension offers features such as quiz generation, lecture notes, jump to timestamp for specific topic and performance feedback to help students maximize their learning experience.
 
-## Available Scripts
+## Getting Started
 
-In the project directory, you can run:
+1. Clone this repository to your local machine.
+2. Run `npm install`
+3. Create `.env` file and put your OpenAI key `REACT_APP_OPENAI_API_KEY`.
+4. Run `npm run build`
+5. Open Chrome and go to `chrome://extensions/`.
+6. Enable "Developer mode" in the top right corner.
+7. Click "Load unpacked" and select the build folder.
+8. The extension should now be installed and active in your browser.
+9. Open Echo360 and lecture recording you'd like watch. The extension should be automatically opened and enjoy playing around with our extension!
 
-### `npm start`
+## Features
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 1. **Quiz Generation**
+Automatically generate quizzes based on the lecture content, where it provide MCQ with timestamps to help students navigate back to specific topic discussed in the lecture.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 2. **Lecture Notes**
+Convert lecture into concise lecture notes that can be downloaded.
 
-### `npm test`
+### 3. **Feedback on Quiz Performance**
+After taking the quiz, students receive detailed feedback highlights the strength and wekaness by each topic. It also provides specific recommendations on areas to improve.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### 4. **Timestamp Navigation**
+Each question includes a link to jump back to the relevant timestamp in the lecture where the topic was discussed.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Screenshots
+![alt text](image-2.png)
+![alt text](image-1.png)
