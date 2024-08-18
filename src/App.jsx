@@ -31,6 +31,10 @@ const App = () => {
     return () => chrome.runtime.onMessage.removeListener(messageListener);
   }, []);
 
+  useEffect(() => {
+    localStorage.clear()
+  }, []);
+
   const handleTranscribe = useCallback(() => {
     setTranscriptText("Fetching lecture transcript...");
     chrome.runtime.sendMessage({ action: "GET_LECTURE_DATA" }, (response) => {
