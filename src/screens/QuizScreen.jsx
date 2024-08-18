@@ -139,7 +139,7 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
 
   const calculateScore = () => {
     const correctAnswers = quizResults.filter(quizResults => quizResults.is_correct).length;
-    return `${correctAnswers}/${quizResults.length}`;
+    return `${correctAnswers}`;
   }
 
   const handleViewFeedback = () => {
