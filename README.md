@@ -32,3 +32,7 @@ Each question includes a link to jump back to the relevant timestamp in the lect
 ## Screenshots
 ![alt text](image-2.png)
 ![alt text](image-1.png)
+
+## AI Usage
+
+The project incorporated the use of AI in several development timeline of the product. During development,AI was used in assisting debugging purposes. Post-development, AI was also used in improving clarity or readability on sentence wordings when appropriate, such as in presentation wordings, etc.
