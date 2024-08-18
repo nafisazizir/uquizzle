@@ -1,44 +1,38 @@
-import React, { useState, useEffect } from "react";
-import { generateFeedback } from "../services/generateFeedback";
+import React, { useState, useEffect } from 'react';
 import Header from "../components/Header/index";
 import WaitingScreen from "./WaitingScreen";
+import { generateFeedback } from '../services/generateFeedback';
 import "./FeedbackScreen.css";
-import data from './feedback.json'
 
-import questionsJson from "../services/questions.json";
-
-const FeedbackScreen = ({
-  transcriptText,
-  onNavigate,
-  questions,
-  userChoice,
-}) => {
-  const [feedback, setFeedback] = useState({});
+const FeedbackScreen = ({ onNavigate, transcriptText, questions, quizResults, score }) => {
+  const [feedback, setFeedback] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [isPositiveOpen, setIsPositiveOpen] = useState(true);
   const [isNegativeOpen, setIsNegativeOpen] = useState(true);
   const [isRecommendationOpen, setIsRecommendationOpen] = useState(true);
 
   useEffect(() => {
     const fetchFeedback = async () => {
-      const generatedFeedback = await generateFeedback(
-        transcriptText,
-        questionsJson,
-        userChoice
-      );
-      setFeedback(generatedFeedback);
+      try {
+        const generatedFeedback = await generateFeedback(transcriptText, questions, quizResults);
+        setFeedback(generatedFeedback);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error generating feedback:", error);
+        setIsLoading(false);
+      }
     };
+
     fetchFeedback();
-  }, [transcriptText, questions, userChoice]);
-
-  // setFeedback(data)
-
-  if (Object.keys(feedback).length === 0) {
-    return <WaitingScreen />;
-  }
+  }, [transcriptText, questions, quizResults]);
 
   const handleBackToDashboard = () => {
     onNavigate('home');
   };
+
+  if (isLoading) {
+    return <WaitingScreen isFeedback={true} />;
+  }
 
   return (
     <div>
@@ -47,7 +41,7 @@ const FeedbackScreen = ({
       <div className="score">
         <h1 className="scorename">Score</h1>
         <h2>
-          <span className="answer">10</span>/10
+          <span className="answer">{score}</span>/10
         </h2>
       </div>
 
@@ -121,8 +115,6 @@ const FeedbackScreen = ({
           Back to Dashboard
         </button>
       </div>
-      
-      
       
     </div>
   );
