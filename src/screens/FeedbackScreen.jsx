@@ -14,9 +14,16 @@ const FeedbackScreen = ({ onNavigate, transcriptText, questions, quizResults, sc
   useEffect(() => {
     const fetchFeedback = async () => {
       try {
-        const generatedFeedback = await generateFeedback(transcriptText, questions, quizResults);
-        setFeedback(generatedFeedback);
-        setIsLoading(false);
+        const storedFeedback = localStorage.getItem('quizFeedback');
+        if (storedFeedback) {
+          setFeedback(JSON.parse(storedFeedback));
+          setIsLoading(false);
+        } else {
+          const generatedFeedback = await generateFeedback(transcriptText, questions, quizResults);
+          setFeedback(generatedFeedback);
+          localStorage.setItem('quizFeedback', JSON.stringify(generatedFeedback));
+          setIsLoading(false);
+        }
       } catch (error) {
         console.error("Error generating feedback:", error);
         setIsLoading(false);
