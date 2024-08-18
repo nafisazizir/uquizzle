@@ -5,12 +5,10 @@ import HomeScreen from "./screens/HomeScreen";
 import QuizScreen from "./screens/QuizScreen";
 import LectureNotesScreen from "./screens/LectureNotesScreen";
 import WaitingScreen from "./screens/WaitingScreen";
+import FeedbackScreen from "./screens/FeedbackScreen";
+import WelcomeScreen from "./screens/WelcomeScreen";
 import "./components/SidebarBase/SidebarBase.css";
 import "./App.css";
-import WelcomeScreen from "./screens/WelcomeScreen";
-import FeedbackScreen from "./screens/FeedbackScreen";
-import userChoice from "./services/userChoice.json"
-
 
 const App = () => {
   const [currentScreen, setCurrentScreen] = useState("welcome");
@@ -18,6 +16,7 @@ const App = () => {
   const [transcriptText, setTranscriptText] = useState("");
   const [questions, setQuestions] = useState([]);
   const [lectureNotes, setLectureNotes] = useState("No lecture notes generated yet.");
+  const [feedbackData, setFeedbackData] = useState(null);
 
   useEffect(() => {
     const messageListener = (message, sender, sendResponse) => {
@@ -55,44 +54,37 @@ const App = () => {
     });
   }, []);
 
+  const handleNavigation = (screen, data = {}) => {
+    if (screen === "feedback") {
+      setFeedbackData(data);
+    }
+    setCurrentScreen(screen);
+  };
+
   const renderScreen = () => {
     switch (currentScreen) {
       case "welcome":
-        return <WelcomeScreen
-          onNavigate={setCurrentScreen}
-          handleTranscribe={handleTranscribe}
-        />;
+        return <WelcomeScreen onNavigate={handleNavigation} handleTranscribe={handleTranscribe} />;
       case "home":
-        return <HomeScreen 
-          onNavigate={setCurrentScreen}
-          lectureTitle={lectureTitle}
-          handleTranscribe={handleTranscribe}
-          transcriptText={transcriptText}
-        />;
+        return <HomeScreen onNavigate={handleNavigation} lectureTitle={lectureTitle} handleTranscribe={handleTranscribe} transcriptText={transcriptText} />;
       case "quiz":
-        return <QuizScreen 
-          questions={questions}
-          setQuestions={setQuestions}
-          transcriptText={transcriptText}
-          onNavigate={setCurrentScreen}
-        />;
+        return <QuizScreen transcriptText={transcriptText} onNavigate={handleNavigation} lectureTitle={lectureTitle} />;
       case "notes":
-        return <LectureNotesScreen 
-          lectureNotes={lectureNotes}
-          setLectureNotes={setLectureNotes}
-          transcriptText={transcriptText}
-          onNavigate={setCurrentScreen}
-          lectureTitle={lectureTitle}
-        />;
+        return <LectureNotesScreen lectureNotes={lectureNotes} setLectureNotes={setLectureNotes} transcriptText={transcriptText} onNavigate={handleNavigation} lectureTitle={lectureTitle} />;
       case "feedback":
-        return <FeedbackScreen 
-          transcriptText={transcriptText}
-          onNavigate={setCurrentScreen}
-          questions={questions}
-          userChoice={userChoice}
-        />;
+        return feedbackData ? (
+          <FeedbackScreen
+            onNavigate={handleNavigation}
+            transcriptText={feedbackData.transcriptText}
+            questions={feedbackData.questions}
+            quizResults={feedbackData.quizResults}
+            score={feedbackData.score}
+          />
+        ) : (
+          <WaitingScreen />
+        );
       default:
-        return <WelcomeScreen onNavigate={setCurrentScreen} />;
+        return <WelcomeScreen onNavigate={handleNavigation} />;
     }
   };
 
