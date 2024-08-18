@@ -42,15 +42,14 @@
   
   .navigation-buttons {
     display: flex;
-    justify-content: space-around;
     margin-top: auto;
-    padding-top: 20px;
+    padding-top: 5px;
   }
   
   .notes-content {
     height: 60vh;
     overflow-y: auto;
-    margin: 20px 0;
+    margin: 10px 0;
     padding: 10px;
     border: 1px solid #efefef;
     border-radius: 5px;

@@ -160,10 +160,14 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
           <h3>Score: {totalScore}</h3>
 
           <div className="completion-buttons">
+<<<<<<< HEAD
             <button
               className="review-button"
               onClick={() => console.log("Review Lecture Notes")}
             >
+=======
+            <button className="review-button" onClick={() => onNavigate("notes")}>
+>>>>>>> b2e0312 (tweak: integrate button in quiz to connect to lecture notes)
               Review Lecture Notes
             </button>
             <button className="download-button" onClick={handleDownloadQuizzes}>
