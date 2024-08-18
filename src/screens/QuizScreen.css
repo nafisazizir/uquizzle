@@ -231,7 +231,6 @@
   .dashboard-button {
     background-color: white;
     color: var(--strawbz);
-    border: 2px solid var(--strawbz) !important;
   }
   
   .made-with-love {
