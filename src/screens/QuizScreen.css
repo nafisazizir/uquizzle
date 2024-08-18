@@ -251,3 +251,45 @@
     --strawbz: rgba(213, 1, 108, 1);
     --white: rgba(255, 255, 255, 1);
   }
+
+.score {
+    display: flex;
+    flex-direction: column;
+}
+
+.answer {
+    color:var(--Danube, #559CCD);
+    font-size: 50px;
+    font-weight: 700;
+}
+
+.scorename {
+    margin-bottom: 0px;
+    font-size: 36px;
+}
+
+.here {
+  color: var(--strawbz); /* Red text color */
+  text-decoration: underline; /* Underline the text */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.here:hover {
+  opacity: 0.8; /* Slight opacity change on hover for visual feedback */
+}
+
+.message {
+  font-size: 12px;
+}
+
+
+.red {
+  color: var(--strawbz)
+}
+
+.answer-text {
+  color: black;
+  margin-bottom: 10px;
+  font-size: 25px;
+  font-weight: 700;
+}

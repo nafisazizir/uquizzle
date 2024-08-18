@@ -10,6 +10,7 @@ import {
   convertQuestionToMarkdownAndDownload,
 } from "../services/download";
 import "./QuizScreen.css";
+import { ReactComponent as Graduate } from "../assets/graduation.svg";
 
 function formatTextWithCode(text) {
   const codePattern = /'''(.*?)'''/g;
@@ -116,6 +117,7 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
     }
   };
 
+
   const handleViewFeedback = () => {
     onNavigate("feedback", { 
       transcriptText, 
@@ -140,26 +142,25 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
       />
       {quizCompleted ? (
         <div className="quiz-completion">
-          <svg
-            width="154"
-            height="154"
-            viewBox="0 0 154 154"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          ></svg>
+
+          <div className="score">
+            <h1 className="scorename">Score</h1>
+            <p className="answer-text">
+              <span className="answer">{totalScore}</span>/10
+            </p>
+            <p style={{
+              marginTop:"0px",
+            }}>See your detailed feedback, <span className="here" onClick={handleViewFeedback}>here</span>!</p>
+          </div>
+          <Graduate/>
 
           <h2>Quiz Conquered! 🎉</h2>
-          <p>
-            You've just leveled up your learning with UQuizzle! Review the
+          <p className="message">
+            You've just leveled up your learning with <span className="red">UQuizzle!</span> Review the
             lecture's material or go back to the dashboard.
           </p>
 
-          <h3>Score: {totalScore}</h3>
-
           <div className="completion-buttons">
-            <button className="feedback-button" onClick={handleViewFeedback}>
-              View Detailed Feedback
-            </button>
             <button className="review-button" onClick={() => onNavigate("notes")}>
               Review Lecture Notes
             </button>
