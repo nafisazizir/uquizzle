@@ -22,7 +22,7 @@ const injectSidebar = () => {
   toggleButton.id = 'echo360-transcriber-toggle';
   toggleButton.innerHTML = logo;
   toggleButton.style.top = '75px';
-  toggleButton.style.right = '330px';
+  toggleButton.style.right = '27vw';
 
   let isMinimized = false;
   let isDragging = false;
@@ -70,7 +70,7 @@ const injectSidebar = () => {
     
     toggleButton.style.left = `${Math.max(0, Math.min(newLeft, maxX))}px`;
     toggleButton.style.top = `${Math.max(0, Math.min(newTop, maxY))}px`;
-    toggleButton.style.right = 'auto';
+    toggleButton.style.right = `1.6vw`;
   };
 
   toggleButton.addEventListener('click', toggleSidebar);

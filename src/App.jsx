@@ -31,6 +31,10 @@ const App = () => {
     return () => chrome.runtime.onMessage.removeListener(messageListener);
   }, []);
 
+  useEffect(() => {
+    localStorage.clear()
+  }, []);
+
   const handleTranscribe = useCallback(() => {
     setTranscriptText("Fetching lecture transcript...");
     chrome.runtime.sendMessage({ action: "GET_LECTURE_DATA" }, (response) => {
@@ -78,6 +82,7 @@ const App = () => {
           setLectureNotes={setLectureNotes}
           transcriptText={transcriptText}
           onNavigate={setCurrentScreen}
+          lectureTitle={lectureTitle}
         />;
       case "feedback":
         return <FeedbackScreen 
