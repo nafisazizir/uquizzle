@@ -46,10 +46,7 @@ const FeedbackScreen = ({ onNavigate, transcriptText, questions, quizResults, sc
       <Header onNavigate={onNavigate} className="sticky-header"/>
 
       <div className="score">
-        <h1 className="scorename">Score</h1>
-        <h2>
-          <span className="answer">{score}</span>/10
-        </h2>
+        <h1 className="scorename">Feedback</h1>
       </div>
 
       <div className="aspect" onClick={() => setIsPositiveOpen(!isPositiveOpen)}>
