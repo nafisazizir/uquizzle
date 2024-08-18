@@ -80,6 +80,19 @@ const HomeScreen = ({ onNavigate, lectureTitle, handleTranscribe, transcriptText
             onClick={() => onNavigate("notes")}
             fullWidth={true}
           />
+
+          {hasFeedback && (
+            <ButtonWithLogo
+              text="View Feedback"
+              color="#61C0FF"
+              icon={Feedback}
+              onClick={() => onNavigate("feedback")}
+              fullWidth={true}
+            />
+          )}
+
+          <button onClick={() => convertQuestionToMarkdownAndDownload(lectureTitle)}>Download Question</button>
+          <button onClick={() => convertLectureNotesToMarkdownAndDownload(lectureTitle)}>Download Lecture Notes</button>
         </div>
       </div>
 
