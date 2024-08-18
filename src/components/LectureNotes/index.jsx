@@ -24,11 +24,11 @@ const LectureNotes = ( { transcriptText, onNavigate, lectureTitle }) => {
     }, [transcriptText]);
 
     return(
-        <div className="frame" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", height: "90vh", padding: "10px", boxSizing: "border-box", }}>
+        <div className="frame" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", alignItems: "center", height: "90vh", padding: "5px", boxSizing: "border-box", }}>
             <div style={{ width: "100%" }}>
                 <HeaderBase />
             </div>
-            <h2>Lecture Notes</h2>
+            <div className="h2-v2">Lecture Notes</div>
 
             <div className="notes-content">
                 { isGenerating ? (
@@ -49,7 +49,7 @@ const LectureNotes = ( { transcriptText, onNavigate, lectureTitle }) => {
                     <>
                         {lectureNotes.map((topic, index) => (
                             <div className="each-topic">
-                                <div key={index}>
+                                <div key={index} className="topic">
                                     <div className="content-title">{topic.title}</div>
                                     <ul>
                                         {topic.content.map((content, id) => (
@@ -64,8 +64,7 @@ const LectureNotes = ( { transcriptText, onNavigate, lectureTitle }) => {
             </div>
 
             {/* Nav Buttons */}
-            <div className="navigation-buttons">
-                <button class="quiz-button" onClick={() => onNavigate('quiz')}>Go to Quiz</button>
+            <div className="navigation-buttons-2">
                 <button class="download-button" disabled={isGenerating} onClick={() => convertLectureNotesToMarkdownAndDownload(lectureTitle)}>Download Notes</button>
                 <button class="dashboard-button-2" onClick={() => onNavigate('home')}>Back to Dashboard</button>
             </div>
