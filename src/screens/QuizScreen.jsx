@@ -150,7 +150,7 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
             </p>
             <p style={{
               marginTop:"0px",
-            }}>See your detailed feedback, <span className="here" onClick={() => onNavigate(handleViewFeedback)}>here</span>!</p>
+            }}>See your detailed feedback, <span className="here" onClick={handleViewFeedback}>here</span>!</p>
           </div>
           <Graduate/>
 
