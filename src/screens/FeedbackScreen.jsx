@@ -3,7 +3,6 @@ import { generateFeedback } from "../services/generateFeedback";
 import Header from "../components/Header/index";
 import WaitingScreen from "./WaitingScreen";
 import "./FeedbackScreen.css";
-import data from './feedback.json'
 
 import questionsJson from "../services/questions.json";
 
