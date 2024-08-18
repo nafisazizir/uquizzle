@@ -164,6 +164,7 @@ const QuizScreen = ({ transcriptText, onNavigate, lectureTitle }) => {
               className="review-button"
               onClick={() => console.log("Review Lecture Notes")}
             >
+            <button className="review-button" onClick={() => onNavigate("notes")}>
               Review Lecture Notes
             </button>
             <button className="download-button" onClick={handleDownloadQuizzes}>
