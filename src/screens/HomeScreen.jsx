@@ -90,9 +90,7 @@ const HomeScreen = ({ onNavigate, lectureTitle, handleTranscribe, transcriptText
               fullWidth={true}
             />
           )}
-
-          <button onClick={() => convertQuestionToMarkdownAndDownload(lectureTitle)}>Download Question</button>
-          <button onClick={() => convertLectureNotesToMarkdownAndDownload(lectureTitle)}>Download Lecture Notes</button>
+          
         </div>
       </div>
 
