@@ -13,12 +13,19 @@ const LectureNotes = ( { transcriptText, onNavigate, lectureTitle }) => {
   
     useEffect(() => {
       const handleGenerateNotes = async () => {
-        try {
-            const generatedNotes = await generateLectureNotes(transcriptText);
-            setLectureNotes(generatedNotes);
-        } finally {
-            setIsGenerating(false);
-        }
+        const localStorageNotes = localStorage.getItem("notes");
+        if (localStorageNotes) {
+            setLectureNotes(JSON.parse(localStorageNotes));
+            setIsGenerating(false)
+        } else {
+            try {
+                const generatedNotes = await generateLectureNotes(transcriptText);
+                setLectureNotes(generatedNotes);
+                localStorage.setItem("notes", JSON.stringify(generatedNotes));
+            } finally {
+                setIsGenerating(false);
+            }
+          }
       };
       handleGenerateNotes();
     }, [transcriptText]);
