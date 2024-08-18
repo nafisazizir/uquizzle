@@ -15,7 +15,7 @@ export const generateQuestions = async (transcriptText) => {
   3.Identify Core Content: Focus only on segments where core concepts or specific details related to the course material are discussed. Ignore introductory, filler, or unrelated content.
   4.Formulate Questions: For each categorized material, generate 10 questions that test understanding of the key concepts. Ensure the questions are clear and directly related to the material.
   5.Provide Options and Explanations: Include one correct answer and three plausible distractors for each question. Also, provide a concise explanation for why the correct answer is accurate and why the incorrect answer is inaccurate.
-  6.Code Formatting: Every instance of code, function names, or syntax elements in questions, options, or explanations, wrap the code in triple quotes ''' so that it can be easily identified and styled as code in the frontend.
+  6.Code Formatting: Every instance of code, function names, or syntax elements in questions, options, or explanations, wrap the code in backtick so that it can be easily identified and styled as code in the frontend.
   7.Timestamp the Answer: Include the timestamp from the original data where the correct answer is derived.
 
   The content is:
