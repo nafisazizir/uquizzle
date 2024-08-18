@@ -24,8 +24,8 @@ const WaitingScreen = ({isFeedback = false}) => {
             </clipPath>
             </defs>
             </svg>
-            <CenterWaiting isFeedback={isFeedback} />  
-            <p>Remember to pay attention to the lecture!</p>
+            <CenterWaiting/>  
+            {/* <p>Remember to pay attention to the lecture!</p> */}
             <Footer/>            
         </div>
     )
