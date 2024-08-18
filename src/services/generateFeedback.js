@@ -7,7 +7,10 @@ const preprocessQuestionsUserChoice = (questions, userChoices) => {
   return questions.map((question) => {
     const userAnswer = userChoices.find(
       (choice) => choice.question_id === question.question_id
-    )?.userChoice;
+    )?.user_choice;
+    const isCorrect = userChoices.find(
+      (choice) => choice.question_id === question.question_id
+    )?.is_correct;
 
     return {
       question_id: question.question_id,
@@ -15,10 +18,16 @@ const preprocessQuestionsUserChoice = (questions, userChoices) => {
       options: question.options,
       correctAnswer: question.correctAnswer,
       userChoice: userAnswer,
+      isCorrect: isCorrect,
       timestamp: question.timestamp,
     };
   });
 };
+
+const calculateScore = (quizResults) => {
+  const correctAnswers = quizResults.filter(quizResults => quizResults.is_correct).length;
+  return `${correctAnswers}/${quizResults.length}`;
+}
 
 export const generateFeedback = async (
   transcriptText,
@@ -36,6 +45,7 @@ export const generateFeedback = async (
     null,
     2
   );
+  const score = calculateScore(userChoice);
 
   const prompt = `You are an expert in educational assessment and feedback generation. You have been given the results of a quiz taken by a student based on a lecture transcript. Your task is to analyze the student's performance, identify their strengths and weaknesses by topic, and provide recommendations for areas to review.
 
@@ -43,7 +53,7 @@ export const generateFeedback = async (
       1. **Analyze Quiz Results**: You will be provided with the lecture transcript, quiz questions, the student's answers, and the correct answers. Use this data to assess the student's accuracy on each topic.
       2. **Categorize by Topic**: For each topic covered in the quiz, calculate the student's accuracy and categorize it into either a strength or a weakness. Strengths are topics where the student performed well, and weaknesses are topics where the student needs improvement.
       3. **Provide Key Points**: For each strength, list key points that contributed to their success. For each weakness, list key points that highlight areas for improvement.
-      4. **Offer Recommendations**: Based on the weaknesses, provide a list of actionable recommendations. These should be specific and help guide the student on what to focus on when reviewing the material.
+      4. **Offer Recommendations**: Based on the weaknesses, provide a list of actionable recommendations. These should be specific and help guide the student on what to focus on when reviewing the material. If students acing the quiz, this section should be a sentence of affirmation to the students.
       5. **Output Format**: Return a JSON object that includes the following structure:
       - "strength": An array of objects, each containing:
           - "topic": The topic where the student performed well.
@@ -55,11 +65,13 @@ export const generateFeedback = async (
           - "accuracy": The percentage of correct answers for that topic.
           - "questionsCovered": An array of question numbers where the topic was covered.
           - "keyPoints": An array of bullet points explaining why this is a weakness.
-      - "recommendation": An array of actionable key points that the student should focus on to improve in their weak areas.
+      - "recommendation": An array of actionable key points that the student should focus on to improve in their weak areas. If student ace the quiz, this should be an array of affirmations and/or mention the strength summary
 
       The data is:
       - "questions": An array of quiz questions and the user's answer.
       - "lectureTranscript": the transcript of the lecture
+
+      The student score: ${score}
 
       lectureTranscript: ${transcriptJsonString}
 
