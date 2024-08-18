@@ -1,4 +1,5 @@
 # UQuizzle
+# Important! Main branch on dev
 ![alt text](image.png)
 
 Chrome extension designed to assist students with their studies by integrating AI-powered tools directly into the Echo360 video player where the lecture recordings are. The extension offers features such as quiz generation, lecture notes, jump to timestamp for specific topic and performance feedback to help students maximize their learning experience.
