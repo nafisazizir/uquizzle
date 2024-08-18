@@ -106,8 +106,12 @@ const FeedbackScreen = ({
       
       <div className={`feedback-container ${isRecommendationOpen ? 'open' : ''}`}>
         <div className="feedback-item">
-          <div className="topic">
-            <p>{feedback.recommendation}</p>
+          <div className="keypoints">
+            <ul>
+              {feedback.recommendation.map((item, index) => (
+                <li key={index}>{item}</li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
