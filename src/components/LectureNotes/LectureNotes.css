@@ -1,4 +1,4 @@
-.topic li {
+li {
     align-self: stretch;
     color: #6b6b6b;
     font-family: "Inter-Medium", Helvetica;
@@ -9,7 +9,7 @@
     text-align: justify;
 }
 
-.topic ul {
+ul {
     margin: 0px;
     padding: 20px;
 }
