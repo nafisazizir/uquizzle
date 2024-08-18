@@ -1,5 +1,6 @@
 import React from "react";
 import "./Welcome.css";
+import ButtonWithLogo from "../ButtonWithLogo";
 
 const Welcome = ( {onNavigate, handleTranscribe}) => {
   return (
@@ -38,14 +39,24 @@ const Welcome = ( {onNavigate, handleTranscribe}) => {
                 </div>
               </div>
 
-              <button
+              <ButtonWithLogo
+                text="Get Started"
+                color="#D5016C"
+                onClick={() => {
+                  onNavigate("home")
+                  handleTranscribe();
+                }}
+                fullWidth={true}
+              />
+
+              {/* <button
                 class="button-strawbz"
                 onClick={() => {
                   onNavigate('home');
                   handleTranscribe();
                 }}>
                   Get Started
-              </button>
+              </button> */}
 
             </div>
           </div>

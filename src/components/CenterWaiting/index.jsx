@@ -13,8 +13,16 @@ const CenterWaiting = ({ isFeedback = false }) => {
             </Sparkles>  
             <Sparkles>
                 <div className='center-waiting-text'>
-                    <h5>AI is curating your <span className="highlight-text">{isFeedback ? 'feedback' : 'quizzles'}</span></h5>
-                    <h6>{isFeedback ? 'Feedback' : 'Questions'} will pop up here as you watch the lecture</h6>
+                    <h5>AI is curating your <span className="highlight-text">quizzles</span></h5>
+                    {/* <h6 style={{
+                fontSize: "14px"
+                }} >Questions will pop up here as you watch the lecture</h6> */}
+                <p style={{
+                color: "#6E6E6E",
+                textAlign: "center",
+                fontSize: "14px",
+                fontWeight: "400"
+                }} >Remember to pay attention to the lecture!</p>
                 </div>  
             </Sparkles>
         </div>
