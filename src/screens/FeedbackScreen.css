@@ -125,8 +125,15 @@ h3 {
 
 .answer {
     color:var(--Danube, #559CCD);
+    font-size: 50px;
+}
+
+.scorename {
+    margin-bottom: 0px;
+    font-size: 36px;
 }
 
 h2 {
-
+    font-size: 25px;
+    margin-top: 0px;
 }

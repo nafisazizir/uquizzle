@@ -45,7 +45,7 @@ const FeedbackScreen = ({
       <Header onNavigate={onNavigate} className="sticky-header"/>
 
       <div className="score">
-        <h1>Score</h1>
+        <h1 className="scorename">Score</h1>
         <h2>
           <span className="answer">10</span>/10
         </h2>
